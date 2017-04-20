@@ -4,15 +4,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:padding="10dp"
     android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_centerHorizontal="true"
-        android:text="TextView" />
-
     <Button
         android:id="@+id/addFriend"
         android:layout_alignParentRight="true"
@@ -24,5 +15,21 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/common_full_open_on_phone" />
+        app:srcCompat="@drawable/common_full_open_on_phone"
+        android:layout_alignBottom="@+id/addFriend"
+        android:contentDescription="@string/profile_picture" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10sp"
+        android:layout_toRightOf="@+id/imageView"
+        android:text="TextView"
+        android:textSize="18sp" />
+
+
+
+
 </RelativeLayout>
