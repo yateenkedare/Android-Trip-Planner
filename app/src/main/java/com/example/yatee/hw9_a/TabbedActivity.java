@@ -66,7 +66,8 @@ public class TabbedActivity extends AppCompatActivity {
                         fab.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                //TODO - Add trip function
+                                Intent intent=new Intent(TabbedActivity.this,AddTripActivity.class);
+                                startActivity(intent);
                             }
                         });
                         break;
