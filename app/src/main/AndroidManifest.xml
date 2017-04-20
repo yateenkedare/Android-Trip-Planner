@@ -21,7 +21,8 @@
             android:name=".TabbedActivity"
             android:label="@string/title_activity_tabbed"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".DiscoverFriendsActivity"></activity>
+        <activity android:name=".DiscoverFriendsActivity" />
+        <activity android:name=".AddTripActivity"></activity>
     </application>
 
 </manifest>
