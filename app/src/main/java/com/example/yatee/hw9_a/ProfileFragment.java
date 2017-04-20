@@ -146,10 +146,10 @@ public class ProfileFragment extends Fragment{
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 
-        rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        rootRef.child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+            public void onDataChange(DataSnapshot snapshot) {
+
                     user=snapshot.getValue(User.class);
                     Log.d("USER1:",user.toString());
                     Log.d("USER2:",snapshot.getKey());
@@ -166,11 +166,6 @@ public class ProfileFragment extends Fragment{
                         firstName.setText(user.getfName());
                         lastName.setText(user.getlName());
                     }
-
-
-                }
-
-
             }
 
             @Override

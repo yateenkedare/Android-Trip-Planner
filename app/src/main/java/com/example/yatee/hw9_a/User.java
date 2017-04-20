@@ -9,9 +9,21 @@ import java.util.ArrayList;
 public class User {
     String fName,lName,photoURL,gender;
     ArrayList<User> friends;
-
+//*********************************
+    ArrayList<String> myTrips;
+//*********************************
     public User() {
     }
+
+    //************************************************************
+    public ArrayList<String> getMyTrips() {
+        return myTrips;
+    }
+
+    public void setMyTrips(ArrayList<String> myTrips) {
+        this.myTrips = myTrips;
+    }
+    //************************************************************
 
     public ArrayList<User> getFriends() {
         return friends;
