@@ -48,7 +48,13 @@ public class TabbedActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(TabbedActivity.this,AddTripActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         //todo SUPPORT DIFFERENT MENU FUNCTIONALITIES

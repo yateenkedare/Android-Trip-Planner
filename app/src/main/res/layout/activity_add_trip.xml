@@ -14,28 +14,18 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:srcCompat="@drawable/ic_done_white_24dp" />
 
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="20sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
+
+    <ImageView
+        android:id="@+id/tripCoverPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/logo"
+        android:layout_marginLeft="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="30sp"
-        android:layout_marginTop="20sp"
-        android:id="@+id/cardView">
-        <ImageView
-            android:id="@+id/tripCoverPhoto"
-            android:layout_width="150sp"
-            android:layout_height="150sp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            app:srcCompat="@drawable/logo"
-            />
-    </android.support.v7.widget.CardView>
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
@@ -43,9 +33,10 @@
         android:layout_height="wrap_content"
         android:text="Title"
         android:layout_marginTop="28dp"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/tripCoverPhoto"
         android:layout_marginLeft="16dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="16dp" />
 
     <EditText
         android:id="@+id/tripTitleTV"
@@ -57,17 +48,17 @@
         android:inputType="textPersonName"
         android:hint="Trip Title"
         app:layout_constraintLeft_toRightOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/tripCoverPhoto"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.506" />
+        app:layout_constraintHorizontal_bias="0.506"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <EditText
         android:id="@+id/tripLocationTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Trip Location"
@@ -84,6 +75,7 @@
         android:layout_marginTop="37dp"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         android:layout_marginLeft="16dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="16dp" />
 
 </android.support.constraint.ConstraintLayout>
