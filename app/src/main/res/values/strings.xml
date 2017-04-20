@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Trip Planner</string>
+    <string name="default_web_client_id_string">339137192207-0r51bbk1ovho90ibpo0ea2solmcmd94s.apps.googleusercontent.com</string>
+    <string-array name="Gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="title_activity_tabbed">Trip Planner</string>
+    <string name="logout">Logout</string>
+    <string name="gender">Gender:</string>
+    <string name="profile_picture">Profile Picture</string>
+</resources>

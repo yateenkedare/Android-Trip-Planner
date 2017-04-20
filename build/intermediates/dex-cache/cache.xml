@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="D:\CollegeStuff\Sem-2\MAD\HomeWorks\HW9\HW9_A\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a1e7fd610654149a5d81d00be41972cd04af9763">
+        <dex dex="D:\CollegeStuff\Sem-2\MAD\HomeWorks\HW9\HW9_A\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_563622498c4c9697960620371538abf94aabb15a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yatee\.android\build-cache\c10af39e846803fa08011fa40135de9016de365f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
+        <dex dex="D:\CollegeStuff\Sem-2\MAD\HomeWorks\HW9\HW9_A\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1cf01b8afd02e569cc9a8a5fbcdcfde313dea61c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\CollegeStuff\Sem-2\MAD\HomeWorks\HW9\HW9_A\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="D:\CollegeStuff\Sem-2\MAD\HomeWorks\HW9\HW9_A\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_c07ad4e6af424259030f480c5addd4f2df006134\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yatee\.android\build-cache\5c9b7edc353d94b01addf08c093be4ce6a844a7d\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="D:\CollegeStuff\Sem-2\MAD\HomeWorks\HW9\HW9_A\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3d0ff30d754f9a095c40b3fde425dc6bf17aa111\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yatee\.android\build-cache\9c36fe08b79a1fecff55ebb60fa553555b1b011a\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="D:\CollegeStuff\Sem-2\MAD\HomeWorks\HW9\HW9_A\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d90014d2a510a66dc2c9171ace9c7594d6213e93\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\yatee\.android\build-cache\a66eb3bd3b335de54555ab05369cee5e3c9fe165\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="D:\CollegeStuff\Sem-2\MAD\HomeWorks\HW9\HW9_A\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d0f2cc934ebcdde83a248e474a2f4785bd20a286\classes.dex" />
+    </item>
+
+</items>

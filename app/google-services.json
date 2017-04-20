@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "339137192207",
+    "firebase_url": "https://mad-hw9.firebaseio.com",
+    "project_id": "mad-hw9",
+    "storage_bucket": "mad-hw9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339137192207:android:9f4213e64198ab05",
+        "android_client_info": {
+          "package_name": "com.example.yatee.hw9_a"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339137192207-pbuitjbhh34p3fcj44h0ap9lof9877t7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yatee.hw9_a",
+            "certificate_hash": "63f31b05ae1a0bfc725477e1a036f23af10af1f4"
+          }
+        },
+        {
+          "client_id": "339137192207-0r51bbk1ovho90ibpo0ea2solmcmd94s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsNA_cMfhzcaBh9Bt5DIHtcY0KvFWTfNU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339137192207-0r51bbk1ovho90ibpo0ea2solmcmd94s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
