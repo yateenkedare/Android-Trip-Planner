@@ -153,15 +153,15 @@ public class ProfileFragment extends Fragment{
                     user=snapshot.getValue(User.class);
                     Log.d("USER1:",user.toString());
                     Log.d("USER2:",snapshot.getKey());
-                    if(snapshot.getKey().toString().equals(firebaseUser.getUid().toString())){
+                    if(snapshot.getKey().equals(firebaseUser.getUid())){
                         if(!user.getPhotoURL().equals("tempUrL")){
                             Picasso.with(getActivity())
                                     .load(user.getPhotoURL())
                                     .into(profilePicture);
                             photoURL=user.getPhotoURL();
-                            progressDialog.dismiss();
-                        }
 
+                        }
+                        progressDialog.dismiss();
 
                         firstName.setText(user.getfName());
                         lastName.setText(user.getlName());
@@ -222,6 +222,7 @@ public class ProfileFragment extends Fragment{
                             Picasso.with(getActivity())
                                     .load(downloadUrl.toString())
                                     .into(profilePicture);
+
 
                         }
                     });
