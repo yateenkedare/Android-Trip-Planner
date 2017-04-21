@@ -1,5 +1,6 @@
 package com.example.yatee.hw9_a;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -66,7 +68,10 @@ public class AddTripActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final ProgressDialog progressDialog=new ProgressDialog(AddTripActivity.this);
+                progressDialog.setMessage("Loading..");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.show();
                 final String key = rootRefTrip.push().getKey();
                 StorageReference storageRef = storage.getReference(key);
 
@@ -85,7 +90,7 @@ public class AddTripActivity extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                         @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                        Trip trip1 = new Trip(mTripTitle.getText().toString(),mTripLocation.getText().toString(),downloadUrl.toString());
+                        Trip trip1 = new Trip(mTripTitle.getText().toString(),mTripLocation.getText().toString(),downloadUrl.toString(),key);
                         rootRefTrip.child(key).setValue(trip1);
 
                         rootRefUser.child(mAuth.getCurrentUser().getUid()).child("myTrips").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -102,12 +107,15 @@ public class AddTripActivity extends AppCompatActivity {
 
                                 trips.add(key);
                                 rootRefUser.child(mAuth.getCurrentUser().getUid()).child("myTrips").setValue(trips);
+                                progressDialog.dismiss();
                                 //TODO - intent to ChatRoom
+                                Toast.makeText(AddTripActivity.this,"Trip Created", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
-                                //TODO - remove progress dialog
+                                progressDialog.dismiss();
+                                Toast.makeText(AddTripActivity.this,"Failed to add trip to your database", Toast.LENGTH_SHORT).show();
                             }
                         });
 //
@@ -115,7 +123,8 @@ public class AddTripActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        //TODO - remove progress dialog
+                        progressDialog.dismiss();
+                        Toast.makeText(AddTripActivity.this,"Failed to Upload image to database", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

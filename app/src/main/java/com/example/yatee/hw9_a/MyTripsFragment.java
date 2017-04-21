@@ -36,9 +36,6 @@ public class MyTripsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_my_trips, container, false);
-        if (getUserVisibleHint()) {
-            visibleActions();
-        }
         return v;
     }
 
@@ -49,6 +46,14 @@ public class MyTripsFragment extends Fragment {
             if(isResumed()){
                 visibleActions();
             }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(getUserVisibleHint()){
+            visibleActions();
         }
     }
 
@@ -64,7 +69,7 @@ public class MyTripsFragment extends Fragment {
                 User currentUser = dataSnapshot.getValue(User.class);
                 trips = new ArrayList<Trip>();
                 listView = (ListView) getActivity().findViewById(R.id.tripsListView);
-                tripsAdapter = new TripsAdapter(getActivity(),R.layout.trips_view,trips);
+                tripsAdapter = new TripsAdapter(getActivity(),R.layout.trips_view,trips, 0);
                 listView.setAdapter(tripsAdapter);
                 tripsAdapter.setNotifyOnChange(true);
                 tripsAdapter.notifyDataSetChanged();

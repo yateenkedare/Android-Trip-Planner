@@ -7,16 +7,25 @@ import java.util.ArrayList;
  */
 
 public class Trip {
-    String title, location, coverURL;
+    String title, location, coverURL, key;
     ArrayList<Message> messages;
     public Trip() {
     }
 
-    public Trip(String title, String location, String coverURL){
+    public Trip(String title, String location, String coverURL, String key){
         this.title = title;
         this.location = location;
         this.coverURL = coverURL;
         messages = new ArrayList<>();
+        this.key = key;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public ArrayList<Message> getMessages() {
