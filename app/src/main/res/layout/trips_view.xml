@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Button
+        android:id="@+id/tripButton"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <ImageView
+        android:id="@+id/imageViewTrip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/common_full_open_on_phone"
+        android:layout_alignBottom="@+id/addFriend"
+        android:contentDescription="@string/profile_picture" />
+
+    <TextView
+        android:id="@+id/textViewTripTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="10sp"
+        android:layout_toRightOf="@+id/imageViewTrip"
+        android:text="TextView"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/textViewTripLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewTripTitle"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="10sp"
+        android:layout_toRightOf="@+id/imageViewTrip"
+        android:text="TextView"/>
+
+</RelativeLayout>

@@ -6,12 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -21,13 +24,12 @@ import java.util.ArrayList;
  */
 
 public class MyTripsFragment extends Fragment {
-    DatabaseReference refUser;
+    DatabaseReference refUser, refTrips;
     FirebaseDatabase db;
     User user;
     FirebaseUser firebaseUser;
-    ArrayList<User> requested;
-    ArrayList<User> received;
-
+    ArrayList<Trip> trips;
+    ListView listView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,19 +51,49 @@ public class MyTripsFragment extends Fragment {
     }
 
     private void visibleActions(){
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseDatabase.getInstance();
         refUser = db.getReference("Users").child(firebaseUser.getUid());
+        refTrips = db.getReference("Trips").child(firebaseUser.getUid());
+        listView = (ListView) getActivity().findViewById(R.id.tripsListView);
         refUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User currentUser = dataSnapshot.getValue(User.class);
-                if(currentUser.getMyTrips() != null){
+                trips = new ArrayList<Trip>();
 
+                if(currentUser.getMyTrips() != null){
+                    for(String s: currentUser.getMyTrips()) {
+                        refTrips.child(s).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Trip t = dataSnapshot.getValue(Trip.class);
+                                trips.add(t);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
                 }
                 if(currentUser.getSubTrips() != null) {
+                    for(String s: currentUser.getSubTrips()) {
+                        refTrips.child(s).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Trip t = dataSnapshot.getValue(Trip.class);
+                                trips.add(t);
+                            }
 
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
                 }
-
             }
 
             @Override
