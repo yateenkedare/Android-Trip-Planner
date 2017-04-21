@@ -1,6 +1,7 @@
 package com.example.yatee.hw9_a;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -95,7 +96,10 @@ public class TripsAdapter extends ArrayAdapter<Trip> {
                 viewHolder.add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //TODO - go To chat room
+                        Intent intent = new Intent(getContext(),TripChatActivity.class);
+
+                        //TODO pust trip key if needed
+                        context.startActivity(intent);
                     }
                 });
             }

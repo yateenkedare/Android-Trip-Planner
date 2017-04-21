@@ -127,7 +127,6 @@ public class SignupActivity extends AppCompatActivity implements GoogleApiClient
                                         user.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                         rootRef.child(firebaseUser.getUid()).setValue(user);
                                         progressDialog.dismiss();
-                                        //TODO - check if after signup it goes directly in Tabbed activity
                                         startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                                         finish();
 

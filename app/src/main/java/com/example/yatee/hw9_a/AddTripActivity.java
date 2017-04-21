@@ -108,7 +108,11 @@ public class AddTripActivity extends AppCompatActivity {
                                 trips.add(key);
                                 rootRefUser.child(mAuth.getCurrentUser().getUid()).child("myTrips").setValue(trips);
                                 progressDialog.dismiss();
-                                //TODO - intent to ChatRoom
+
+                                Intent intent = new Intent(AddTripActivity.this,TripChatActivity.class);
+                                //TODO pust trip key if needed
+                                startActivity(intent);
+
                                 Toast.makeText(AddTripActivity.this,"Trip Created", Toast.LENGTH_SHORT).show();
                             }
 
