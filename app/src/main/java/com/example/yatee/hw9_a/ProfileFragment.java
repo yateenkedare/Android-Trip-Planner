@@ -187,7 +187,7 @@ public class ProfileFragment extends Fragment{
                     Uri selectedImage = data.getData();
                     profilePicture.setImageURI(selectedImage);
 
-                    path="profilePicture.png";
+                    path="profilePicture.png"+ firebaseUser.getUid();
                     StorageReference storageRef = storage.getReference(path);
 
                     profilePicture.setDrawingCacheEnabled(true);

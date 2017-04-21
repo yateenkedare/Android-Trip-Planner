@@ -41,8 +41,7 @@ public class UserAdapter extends ArrayAdapter<User> {
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        pos=position;
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater= (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             convertView=inflater.inflate(resource,parent,false);
@@ -54,6 +53,7 @@ public class UserAdapter extends ArrayAdapter<User> {
                 .load(objects.get(position).getPhotoURL())
                 .resize(140,140)
                 .into(imageView);
+        pos=position;
         Button addFriend= (Button) convertView.findViewById(R.id.addFriend);
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,16 +68,52 @@ public class UserAdapter extends ArrayAdapter<User> {
                             User user=snapshot.getValue(User.class);
                             Log.d("USER1:",user.toString());
                             Log.d("USER2:",snapshot.getKey());
+                            Log.d("POS:",String.valueOf(position));
                             if(snapshot.getKey().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getUid().toString())){
-                                if(user.getFriends()!=null){
-                                    ArrayList<User> friends=new ArrayList<User>(user.getFriends());
-                                    friends.add(objects.get(pos));
-                                    user.setFriends(friends);
+                                if(user.getRequests()!=null){
+                                    Log.d("IF:","Entered");
+                                    Log.d("IF:",user.getRequests().toString());
+                                    ArrayList<String> requests=new ArrayList<>(user.getRequests());
+                                    Log.d("REQ:",requests.toString());
+                                    requests.add(objects.get(position).getId());
+                                    Log.d("REQEDIT:",requests.toString());
+                                    user.setRequests(requests);
+                                    if(objects.get(position).getRequestsReceived()!=null){
+                                        Log.d("FULL-IF:","working");
+                                        ArrayList<String> receivedReq=new ArrayList<String>(objects.get(position).getRequestsReceived());
+                                        receivedReq.add(FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
+                                        objects.get(position).setRequestsReceived(receivedReq);
+                                        ref2.child(objects.get(position).getId()).setValue(objects.get(position));
+                                    }
+                                    else{
+                                        Log.d("FULL-ELSE:","working");
+                                        ArrayList<String> receivedReq=new ArrayList<String>();
+                                        receivedReq.add(FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
+                                        objects.get(position).setRequestsReceived(receivedReq);
+                                        ref2.child(objects.get(position).getId()).setValue(objects.get(position));
+                                    }
+
+
                                 }
                                 else{
-                                    ArrayList<User> friends=new ArrayList<User>();
-                                    friends.add(objects.get(pos));
-                                    user.setFriends(friends);
+
+                                    ArrayList<String> requests=new ArrayList<String>();
+                                    requests.add(objects.get(position).getId());
+                                    user.setRequests(requests);
+                                    if(objects.get(position).getRequestsReceived()!=null){
+                                        Log.d("EMPTY-IF:","working");
+                                        ArrayList<String> receivedReq=new ArrayList<String>(objects.get(position).getRequestsReceived());
+                                        receivedReq.add(FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
+                                        objects.get(position).setRequestsReceived(receivedReq);
+                                        ref2.child(objects.get(position).getId()).setValue(objects.get(position));
+                                    }
+                                    else{
+                                        Log.d("EMPTY-ELSE:","working");
+                                        ArrayList<String> receivedReq=new ArrayList<String>();
+                                        receivedReq.add(FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
+                                        objects.get(position).setRequestsReceived(receivedReq);
+                                        ref2.child(objects.get(position).getId()).setValue(objects.get(position));
+                                    }
                                 }
                                 ref2.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
 

@@ -2,17 +2,36 @@ package com.example.yatee.hw9_a;
 
 import java.util.ArrayList;
 
-/**
- * Created by rajdeeprao on 4/16/17.
- */
-
 public class User {
-    String fName,lName,photoURL,gender;
-    ArrayList<User> friends;
-//*********************************
-    ArrayList<String> myTrips;
-//*********************************
+    private String fName,lName,photoURL,gender, id;
+    private ArrayList<String> friends;
+    private ArrayList<String> myTrips, requestsReceived, requests;
+
     public User() {
+    }
+
+    public ArrayList<String> getRequestsReceived() {
+        return requestsReceived;
+    }
+
+    public void setRequestsReceived(ArrayList<String> requestsReceived) {
+        this.requestsReceived = requestsReceived;
+    }
+
+    public ArrayList<String> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(ArrayList<String> requests) {
+        this.requests = requests;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     //************************************************************
@@ -25,11 +44,11 @@ public class User {
     }
     //************************************************************
 
-    public ArrayList<User> getFriends() {
+    public ArrayList<String> getFriends() {
         return friends;
     }
 
-    public void setFriends(ArrayList<User> friends) {
+    public void setFriends(ArrayList<String> friends) {
         this.friends = friends;
     }
 
