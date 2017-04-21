@@ -5,9 +5,17 @@ import java.util.ArrayList;
 public class User {
     private String fName,lName,photoURL,gender, id;
     private ArrayList<String> friends;
-    private ArrayList<String> myTrips, requestsReceived, requests;
+    private ArrayList<String> myTrips, requestsReceived, requests, subTrips;
 
     public User() {
+    }
+
+    public ArrayList<String> getSubTrips() {
+        return subTrips;
+    }
+
+    public void setSubTrips(ArrayList<String> subTrips) {
+        this.subTrips = subTrips;
     }
 
     public ArrayList<String> getRequestsReceived() {

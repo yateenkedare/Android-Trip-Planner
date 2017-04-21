@@ -15,24 +15,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c318a4dc-f10f-4122-86d1-e7b0a5227937" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/RequestAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/requests.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/DiscoverFriendsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/DiscoverFriendsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/FriendsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/FriendsFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/ProfileFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/ProfileFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/SignupActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/SignupActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/MyTripsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/MyTripsFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/User.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/UserAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/UserAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_friends.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_friends.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_trips.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_trips.xml" />
     </list>
     <ignored path="HW9_A.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,113 +50,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="AddTripActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/AddTripActivity.java">
+      <file leaf-file-name="MyTripsFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/MyTripsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="532">
-              <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-              <folding>
-                <element signature="e#2280#2647#0" expanded="true" />
-                <element signature="e#2646#2647#0" expanded="true" />
-                <element signature="e#2700#5530#0" expanded="true" />
-                <element signature="e#3427#5264#0" expanded="true" />
-                <element signature="e#3615#3651#1" expanded="true" />
-                <element signature="e#4371#4379#0" expanded="true" />
-                <element signature="e#5263#5264#0" expanded="true" />
-                <element signature="e#5287#5504#0" expanded="true" />
-                <element signature="e#5503#5504#0" expanded="true" />
-                <element signature="e#5529#5530#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_friends.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_friends.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DiscoverFriendsActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/DiscoverFriendsActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/UserAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FriendsFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/FriendsFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="85" column="108" selection-start-line="85" selection-start-column="108" selection-end-line="85" selection-end-column="108" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProfileFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/ProfileFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="74" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="74" selection-end-column="4" />
+              <caret line="61" column="20" selection-start-line="61" selection-start-column="20" selection-end-line="61" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="requests.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/requests.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RequestAdapter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/RequestAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="88" column="39" selection-start-line="88" selection-start-column="39" selection-end-line="88" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SignupActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/SignupActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="730">
-              <caret line="203" column="37" selection-start-line="203" selection-start-column="37" selection-end-line="203" selection-end-column="37" />
-              <folding>
-                <element signature="e#5177#6439#0" expanded="true" />
-                <element signature="e#6438#6439#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -179,24 +65,39 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+            <state relative-caret-position="264">
+              <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
               <folding>
-                <element signature="e#320#321#0" expanded="true" />
-                <element signature="e#359#360#0" expanded="true" />
-                <element signature="e#567#568#0" expanded="true" />
-                <element signature="e#626#627#0" expanded="true" />
-                <element signature="e#666#667#0" expanded="true" />
-                <element signature="e#695#696#0" expanded="true" />
-                <element signature="e#720#721#0" expanded="true" />
-                <element signature="e#756#757#0" expanded="true" />
-                <element signature="e#784#785#0" expanded="true" />
-                <element signature="e#896#897#0" expanded="true" />
-                <element signature="e#926#927#0" expanded="true" />
-                <element signature="e#983#984#0" expanded="true" />
-                <element signature="e#1021#1022#0" expanded="true" />
+                <element signature="e#353#354#0" expanded="true" />
+                <element signature="e#412#413#0" expanded="true" />
+                <element signature="e#452#453#0" expanded="true" />
+                <element signature="e#722#723#0" expanded="true" />
+                <element signature="e#753#754#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FriendsFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/FriendsFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="77" column="69" selection-start-line="77" selection-start-column="69" selection-end-line="77" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_my_trips.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_my_trips.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
@@ -2213,8 +2114,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_discover_friends.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_tabbed.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_tabbed.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_trips.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/MyTripsFragment.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
@@ -2231,12 +2130,14 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/RequestsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/SignupActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/UserAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/User.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_friends.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/ProfileFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/DiscoverFriendsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/FriendsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/RequestAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_trips.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/User.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/MyTripsFragment.java" />
       </list>
     </option>
   </component>
@@ -2773,7 +2674,14 @@
       <option name="project" value="LOCAL" />
       <updated>1492727015238</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixed profile progressDialog&#10;Added AddTripActivity &#10;">
+      <created>1492736864256</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1492736864256</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2795,7 +2703,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896304" sideWeight="0.5021552" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39928487" sideWeight="0.49784482" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39928487" sideWeight="0.49784482" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896304" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896304" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -3040,27 +2948,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/MyTripsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_my_trips.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_trip.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -3159,25 +3046,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/AddTripActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-          <folding>
-            <element signature="e#2280#2647#0" expanded="true" />
-            <element signature="e#2646#2647#0" expanded="true" />
-            <element signature="e#2700#5530#0" expanded="true" />
-            <element signature="e#3427#5264#0" expanded="true" />
-            <element signature="e#3615#3651#1" expanded="true" />
-            <element signature="e#4371#4379#0" expanded="true" />
-            <element signature="e#5263#5264#0" expanded="true" />
-            <element signature="e#5287#5504#0" expanded="true" />
-            <element signature="e#5503#5504#0" expanded="true" />
-            <element signature="e#5529#5530#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/SignupActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="730">
@@ -3185,28 +3053,6 @@
           <folding>
             <element signature="e#5177#6439#0" expanded="true" />
             <element signature="e#6438#6439#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-          <folding>
-            <element signature="e#320#321#0" expanded="true" />
-            <element signature="e#359#360#0" expanded="true" />
-            <element signature="e#567#568#0" expanded="true" />
-            <element signature="e#626#627#0" expanded="true" />
-            <element signature="e#666#667#0" expanded="true" />
-            <element signature="e#695#696#0" expanded="true" />
-            <element signature="e#720#721#0" expanded="true" />
-            <element signature="e#756#757#0" expanded="true" />
-            <element signature="e#784#785#0" expanded="true" />
-            <element signature="e#896#897#0" expanded="true" />
-            <element signature="e#926#927#0" expanded="true" />
-            <element signature="e#983#984#0" expanded="true" />
-            <element signature="e#1021#1022#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3233,32 +3079,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/DiscoverFriendsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/ProfileFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="74" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="74" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/FriendsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="85" column="108" selection-start-line="85" selection-start-column="108" selection-end-line="85" selection-end-column="108" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/UserAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -3269,9 +3089,89 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/RequestAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="88" column="39" selection-start-line="88" selection-start-column="39" selection-end-line="88" selection-end-column="39" />
+        <state relative-caret-position="43">
+          <caret line="74" column="20" selection-start-line="74" selection-start-column="20" selection-end-line="74" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/AddTripActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding>
+            <element signature="e#2280#2647#0" expanded="true" />
+            <element signature="e#2646#2647#0" expanded="true" />
+            <element signature="e#2700#5530#0" expanded="true" />
+            <element signature="e#3427#5264#0" expanded="true" />
+            <element signature="e#3615#3651#1" expanded="true" />
+            <element signature="e#4371#4379#0" expanded="true" />
+            <element signature="e#5263#5264#0" expanded="true" />
+            <element signature="e#5287#5504#0" expanded="true" />
+            <element signature="e#5503#5504#0" expanded="true" />
+            <element signature="e#5529#5530#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_my_trips.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/ProfileFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/DiscoverFriendsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="55" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/FriendsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="77" column="69" selection-start-line="77" selection-start-column="69" selection-end-line="77" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+          <folding>
+            <element signature="e#353#354#0" expanded="true" />
+            <element signature="e#412#413#0" expanded="true" />
+            <element signature="e#452#453#0" expanded="true" />
+            <element signature="e#722#723#0" expanded="true" />
+            <element signature="e#753#754#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/yatee/hw9_a/MyTripsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="61" column="20" selection-start-line="61" selection-start-column="20" selection-end-line="61" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
