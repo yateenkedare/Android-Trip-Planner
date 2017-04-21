@@ -54,11 +54,14 @@ public class UserAdapter extends ArrayAdapter<User> {
                 .resize(140,140)
                 .into(imageView);
         pos=position;
-        Button addFriend= (Button) convertView.findViewById(R.id.addFriend);
+        final Button addFriend= (Button) convertView.findViewById(R.id.addFriend);
+        addFriend.setText("Add Friend");
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("Demo:","Friend added");
+                addFriend.setClickable(false);
+                addFriend.setEnabled(false);
                 db = FirebaseDatabase.getInstance();
                 ref2 = db.getReference("Users");
                 ref2.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -92,7 +95,6 @@ public class UserAdapter extends ArrayAdapter<User> {
                                         objects.get(position).setRequestsReceived(receivedReq);
                                         ref2.child(objects.get(position).getId()).setValue(objects.get(position));
                                     }
-
 
                                 }
                                 else{

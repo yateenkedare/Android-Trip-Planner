@@ -29,7 +29,7 @@ public class FriendsFragment extends Fragment {
     FirebaseDatabase db;
     User user;
     FirebaseUser firebaseUser;
-    ArrayList<User> requested;
+    ArrayList<User> friends;
     ArrayList<User> received;
 
     @Nullable
@@ -56,7 +56,7 @@ public class FriendsFragment extends Fragment {
     private void visibleActions(){
         db = FirebaseDatabase.getInstance();
 
-        requested=new ArrayList<User>();
+        friends=new ArrayList<User>();
         received=new ArrayList<User>();
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         ref2 = db.getReference("Users").child(firebaseUser.getUid());
@@ -68,6 +68,7 @@ public class FriendsFragment extends Fragment {
                 Log.d("UserIS:",snapshot.getValue(User.class).toString());
                 user=snapshot.getValue(User.class);
                 final ArrayList<String> requestReceivedString=user.getRequestsReceived();
+                final ArrayList<String> friendsString=user.getFriends();
                 ref3.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -81,12 +82,27 @@ public class FriendsFragment extends Fragment {
                                 }
                                 Log.d("ReceivedList:",received.toString());
                                 ListView lv= (ListView) getActivity().findViewById(R.id.received);
-                                //ListView lv2= (ListView) findViewById(R.id.sent);
+
                                 //ArrayAdapter<Color> adapter=new ArrayAdapter<Color>(this,android.R.layout.simple_list_item_1,colors);
-                                RequestAdapter adapter=new RequestAdapter(getActivity(),R.layout.requests,received,user,ref3);
+                                RequestAdapter adapter=new RequestAdapter(getActivity(),R.layout.requests,received,user,ref3,1);
                                 lv.setAdapter(adapter);
                                 adapter.setNotifyOnChange(true);
                             }
+
+                            if(friendsString!=null)
+                                for(int i=0;i<friendsString.size();i++){
+                                    Log.d("Testing:",friendsString.get(i));
+                                    if(snapshot1.getKey().toString().equals(friendsString.get(i))){
+                                        Log.d("Testing:","Entered");
+                                        friends.add(snapshot1.getValue(User.class));
+                                    }
+                                    Log.d("FriendsList:",received.toString());
+                                    ListView lv2= (ListView) getActivity().findViewById(R.id.friends);
+                                    //ArrayAdapter<Color> adapter=new ArrayAdapter<Color>(this,android.R.layout.simple_list_item_1,colors);
+                                    RequestAdapter adapter=new RequestAdapter(getActivity(),R.layout.requests,friends,user,ref3,2);
+                                    lv2.setAdapter(adapter);
+                                    adapter.setNotifyOnChange(true);
+                                }
                         }
                     }
 
