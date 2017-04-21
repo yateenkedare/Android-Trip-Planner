@@ -63,7 +63,7 @@ public class RequestAdapter extends ArrayAdapter<User> {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO mode 1=> ADD, mode 2=>Remove
+
                 Log.d("userclick:",objects.get(position).toString());
                 if(mode==1){
                     ArrayList<String> friends;
