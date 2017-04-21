@@ -23,7 +23,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DiscoverFriendsActivity" />
         <activity android:name=".AddTripActivity" />
-        <activity android:name=".DiscoverTripsActivity"></activity>
+        <activity android:name=".DiscoverTripsActivity" />
+        <activity android:name=".TripChatActivity"></activity>
     </application>
 
 </manifest>
