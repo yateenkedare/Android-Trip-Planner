@@ -97,8 +97,7 @@ public class TripsAdapter extends ArrayAdapter<Trip> {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getContext(),TripChatActivity.class);
-
-                        //TODO pust trip key if needed
+                        intent.putExtra("KEY",trip.getKey());
                         context.startActivity(intent);
                     }
                 });

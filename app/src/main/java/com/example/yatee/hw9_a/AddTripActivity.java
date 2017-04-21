@@ -110,7 +110,7 @@ public class AddTripActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
 
                                 Intent intent = new Intent(AddTripActivity.this,TripChatActivity.class);
-                                //TODO pust trip key if needed
+                                intent.putExtra("KEY",key);
                                 startActivity(intent);
 
                                 Toast.makeText(AddTripActivity.this,"Trip Created", Toast.LENGTH_SHORT).show();
