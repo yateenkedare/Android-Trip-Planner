@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,12 @@ public class TripsAdapter extends ArrayAdapter<Trip> {
     int resource;
     List<Trip> objects;
 
+    private static class ViewHolder {
+        TextView tvTitle;
+        TextView tvLocation;
+        ImageView imageView;
+        Button add;
+    }
 
     public TripsAdapter(@NonNull Context context, @LayoutRes int resource, List<Trip> objects) {
         super(context, resource);
@@ -37,30 +44,42 @@ public class TripsAdapter extends ArrayAdapter<Trip> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        Trip trip = getItem(position);
+
+        ViewHolder viewHolder;
+
+
         if(convertView == null) {
-            LayoutInflater inflater= (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            convertView=inflater.inflate(resource,parent,false);
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(resource, parent, false);
+            viewHolder.tvTitle= (TextView) convertView.findViewById(R.id.textViewTripTitle);
+            viewHolder.tvLocation = (TextView) convertView.findViewById(R.id.textViewTripLocation);
+            viewHolder.imageView = (ImageView) convertView.findViewById(R.id.imageViewTrip);
+            viewHolder.add = (Button) convertView.findViewById(R.id.tripButton);
+
+            convertView.setTag(viewHolder);
         }
+        else {
+            // View is being recycled, retrieve the viewHolder object from tag
 
-        final TextView tvTitle= (TextView) convertView.findViewById(R.id.textViewTripTitle);
-        final TextView tvLocation= (TextView) convertView.findViewById(R.id.textViewTripLocation);
-        final ImageView imageView= (ImageView) convertView.findViewById(R.id.imageViewTrip);
-        final Button add= (Button) convertView.findViewById(R.id.tripButton);
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        Log.d("TRIP List View", objects.toString());
+        if(trip != null) {
+            viewHolder.tvTitle.setText(trip.getTitle());
+            viewHolder.tvLocation.setText(trip.getLocation());
+            Picasso.with(context)
+                    .load(trip.getCoverURL())
+                    .into(viewHolder.imageView);
+            viewHolder.add.setText("Chat");
+            viewHolder.add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        Picasso.with(context)
-                .load(objects.get(position).getCoverURL())
-                .into(imageView);
-
-        tvTitle.setText(objects.get(position).getTitle());
-        tvLocation.setText(objects.get(position).getLocation());
-
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-            }
-        });
-
+                }
+            });
+        }
         return convertView;
     }
 }
