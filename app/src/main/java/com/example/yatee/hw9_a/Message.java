@@ -5,49 +5,58 @@ package com.example.yatee.hw9_a;
  */
 
 public class Message {
-    String time,text, imageURL, sender;
-    public Message() {
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
+    private long id;
+    private String name;
+    private String message;
+    private String userId;
 
     @Override
     public String toString() {
         return "Message{" +
-                "time='" + time + '\'' +
-                ", text='" + text + '\'' +
-                ", imageURL='" + imageURL + '\'' +
-                ", sender='" + sender + '\'' +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", userId=" + userId +
+                ", dateTime='" + dateTime + '\'' +
                 '}';
+    }
+
+    private String dateTime;
+
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public String getMessage() {
+        return message;
+    }
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getDate() {
+        return dateTime;
+    }
+
+    public void setDate(String dateTime) {
+        this.dateTime = dateTime;
     }
 }
