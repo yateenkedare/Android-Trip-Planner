@@ -5,5 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.yatee.hw9_a.AddFriendsToTripActivity">
-
+    <ListView
+        android:id="@+id/lvAddFriendsToTrip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </android.support.constraint.ConstraintLayout>

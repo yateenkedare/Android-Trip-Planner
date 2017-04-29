@@ -10,5 +10,9 @@
         android:id="@+id/leaveChatRoom"
         app:showAsAction="collapseActionView"
         android:title="Leave Chat" />
+    <item
+        android:id="@+id/tripProfile"
+        app:showAsAction="collapseActionView"
+        android:title="Trip Profile" />
 
 </menu>

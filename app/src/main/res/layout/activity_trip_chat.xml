@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/chatSendButton"
+            android:layout_toLeftOf="@+id/imageUpload"
             android:autoText="true"
             android:hint="type message" />
         <ImageView
