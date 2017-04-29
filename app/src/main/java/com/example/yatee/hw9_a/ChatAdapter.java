@@ -77,20 +77,28 @@ public class ChatAdapter extends BaseAdapter {
                 @Override
                 public boolean onLongClick(View v) {
                     GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
-                    final ArrayList<String> deletedMessages=new ArrayList<String>();
-                    rootRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("DeletedMessages").addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    ref1.child("DeletedMessages").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {};
+                            ArrayList<String> deletedMessages = new ArrayList<String>();
+                            if(dataSnapshot != null) {
+                                deletedMessages= dataSnapshot.getValue(t);
+                            }
                             Log.d("Deletemessages: ",dataSnapshot.toString());
-                            if(dataSnapshot!=null){
+                            if(deletedMessages!=null){
                                 deletedMessages.add(String.valueOf(chatMessage.getId()));
                                 Log.d("Deletemessages:(IF)",deletedMessages.toString());
                                 ref1.child("DeletedMessages").setValue(deletedMessages);
                             }else{
+                                deletedMessages=new ArrayList<String>();
                                 deletedMessages.add(String.valueOf(chatMessage.getId()));
-                                Log.d("Deletemessages:(ELSE)",deletedMessages.toString());
+                                Log.d("DeletedMessages:(ELSE)",deletedMessages.toString());
                                 ref1.child("DeletedMessages").setValue(deletedMessages);
                             }
+
                         }
 
                         @Override
@@ -99,8 +107,10 @@ public class ChatAdapter extends BaseAdapter {
                         }
                     });
 
+
                     //rootRef.child(String.valueOf(chatMessage.getId())).removeValue();
                     chatMessages.remove(position);
+                    notifyDataSetChanged();
                     Log.d("Clicked","yep");
                     return false;
                 }

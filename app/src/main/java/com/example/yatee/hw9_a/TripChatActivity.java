@@ -19,10 +19,12 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
@@ -52,6 +54,7 @@ public class TripChatActivity extends AppCompatActivity {
     private ImageView sendImage;
     private ChatAdapter adapter;
     private ArrayList<Message> chatHistory;
+    ArrayList<String> deletedMessages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,40 +220,60 @@ public class TripChatActivity extends AppCompatActivity {
     }
 
     private void loadDummyHistory(){
+        Log.d("loadDummyHistory:","run");
+        messagesContainer.setAdapter(null);
         chatHistory = new ArrayList<Message>();
-        ArrayList<String> deletedMessages=new ArrayList<>();
-        ref1.child(firebaseUser.getUid()).child("DeletedMessages").addListenerForSingleValueEvent(new ValueEventListener() {
+        deletedMessages=new ArrayList<>();
+        ref1.child("DeletedMessages").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {};
+                if(dataSnapshot != null) {
+                    deletedMessages= dataSnapshot.getValue(t);
 
-            }
+                    rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                                if(deletedMessages!=null){
+                                    Log.d("DeletedMessages:",deletedMessages.toString());
+                                    if(!deletedMessages.contains(String.valueOf(String.valueOf(snapshot.getValue(Message.class).getId())))){
+                                        chatHistory.add(snapshot.getValue(Message.class));
+                                        adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>(),rootRef,ref1);
+                                        messagesContainer.setAdapter(adapter);
+                                        for(int i=0; i<chatHistory.size(); i++) {
+                                            Message message = chatHistory.get(i);
+                                            displayMessage(message);
+                                        }
+                                    }
+                                }else{
+                                    chatHistory.add(snapshot.getValue(Message.class));
+                                    adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>(),rootRef,ref1);
+                                    messagesContainer.setAdapter(adapter);
+                                    for(int i=0; i<chatHistory.size(); i++) {
+                                        Message message = chatHistory.get(i);
+                                        displayMessage(message);
+                                    }
+                                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
-        rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    chatHistory.add(snapshot.getValue(Message.class));
-                    adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>(),rootRef,ref1);
-                    messagesContainer.setAdapter(adapter);
+                            }
+                        }
 
-                    for(int i=0; i<chatHistory.size(); i++) {
-                        Message message = chatHistory.get(i);
-                        displayMessage(message);
-                    }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
                 }
-            }
 
+            }
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
     }
 
 
@@ -354,14 +377,18 @@ public class TripChatActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.addMembersToTripChat:
-                Intent intent = new Intent(TripChatActivity.this,LoginActivity.class);
+                //TODO unimplemented
+                Intent intent = new Intent(TripChatActivity.this,AddFriendsToTripActivity.class);
                 intent.putExtra("KEY",tripKey);
                 startActivity(intent);
                 return true;
             case R.id.leaveChatRoom:
                 //TODO - delete trip from sub trips or my trips
                 return true;
-
+            case R.id.tripProfile:
+                Intent intent1 = new Intent(TripChatActivity.this, TripProfileActivity.class);
+                intent1.putExtra("KEY",tripKey);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
