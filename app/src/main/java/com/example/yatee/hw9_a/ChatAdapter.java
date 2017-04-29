@@ -13,7 +13,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,10 +30,14 @@ public class ChatAdapter extends BaseAdapter {
 
     private final List<Message> chatMessages;
     private Activity context;
+    DatabaseReference rootRef;
+    DatabaseReference ref1;
 
-    public ChatAdapter(Activity context, List<Message> chatMessages) {
+    public ChatAdapter(Activity context, List<Message> chatMessages, DatabaseReference rootRef,DatabaseReference ref1) {
         this.context = context;
         this.chatMessages = chatMessages;
+        this.rootRef=rootRef;
+        this.ref1=ref1;
     }
 
     @Override
@@ -56,17 +66,43 @@ public class ChatAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        Message chatMessage = getItem(position);
+        final Message chatMessage = getItem(position);
         LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
             convertView = vi.inflate(R.layout.list_item_chat_message, null);
             holder = createViewHolder(convertView);
             convertView.setTag(holder);
-            convertView.setOnClickListener(new View.OnClickListener() {
+            convertView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onClick(View v) {
+                public boolean onLongClick(View v) {
+                    GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                    final ArrayList<String> deletedMessages=new ArrayList<String>();
+                    rootRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("DeletedMessages").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Log.d("Deletemessages: ",dataSnapshot.toString());
+                            if(dataSnapshot!=null){
+                                deletedMessages.add(String.valueOf(chatMessage.getId()));
+                                Log.d("Deletemessages:(IF)",deletedMessages.toString());
+                                ref1.child("DeletedMessages").setValue(deletedMessages);
+                            }else{
+                                deletedMessages.add(String.valueOf(chatMessage.getId()));
+                                Log.d("Deletemessages:(ELSE)",deletedMessages.toString());
+                                ref1.child("DeletedMessages").setValue(deletedMessages);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    //rootRef.child(String.valueOf(chatMessage.getId())).removeValue();
+                    chatMessages.remove(position);
                     Log.d("Clicked","yep");
+                    return false;
                 }
             });
         } else {

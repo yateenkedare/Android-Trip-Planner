@@ -218,12 +218,24 @@ public class TripChatActivity extends AppCompatActivity {
 
     private void loadDummyHistory(){
         chatHistory = new ArrayList<Message>();
+        ArrayList<String> deletedMessages=new ArrayList<>();
+        ref1.child(firebaseUser.getUid()).child("DeletedMessages").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     chatHistory.add(snapshot.getValue(Message.class));
-                    adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>());
+                    adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>(),rootRef,ref1);
                     messagesContainer.setAdapter(adapter);
 
                     for(int i=0; i<chatHistory.size(); i++) {
