@@ -66,7 +66,7 @@ public class MyTripsFragment extends Fragment {
         refUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User currentUser = dataSnapshot.getValue(User.class);
+                final User currentUser = dataSnapshot.getValue(User.class);
                 trips = new ArrayList<Trip>();
                 listView = (ListView) getActivity().findViewById(R.id.tripsListView);
                 tripsAdapter = new TripsAdapter(getActivity(),R.layout.trips_view,trips, 0);
@@ -79,31 +79,39 @@ public class MyTripsFragment extends Fragment {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 Trip t = dataSnapshot.getValue(Trip.class);
-                                Log.d("Trips", t.toString());
+                                Log.d("Trips test", t.toString());
                                 tripsAdapter.add(t);
                                 tripsAdapter.notifyDataSetChanged();
+
                             }
 
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
-
+                                Log.d("ONCANCELLED", "OnCancelled");
                             }
                         });
                     }
                 }
                 if(currentUser.getSubTrips() != null) {
-                    for(String s: currentUser.getSubTrips()) {
+                    for(final String s: currentUser.getSubTrips()) {
                         refTrips.child(s).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 Trip t = dataSnapshot.getValue(Trip.class);
                                 Log.d("Trips", dataSnapshot.toString());
-                                tripsAdapter.add(t);
+                                if(dataSnapshot.getValue() != null) {
+                                    tripsAdapter.add(t);
+                                    tripsAdapter.notifyDataSetChanged();
+                                }
+                                else {
+                                    currentUser.getSubTrips().remove(s);
+                                    refUser.child("subTrips").setValue(currentUser.getSubTrips());
+                                }
                             }
 
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
-
+                                Log.d("ONCANCELLED", "OnCancelled");
                             }
                         });
                     }
