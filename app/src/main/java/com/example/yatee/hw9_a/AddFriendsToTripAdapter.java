@@ -64,7 +64,7 @@ public class AddFriendsToTripAdapter extends ArrayAdapter<User> {
                     .load(user.getPhotoURL())
                     .resize(140,140)
                     .into(viewHolder.iv_pic);
-
+            viewHolder.button_add.setText("Add");
             viewHolder.button_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
