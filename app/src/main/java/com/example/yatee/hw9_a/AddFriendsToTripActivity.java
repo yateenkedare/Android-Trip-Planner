@@ -28,18 +28,38 @@ public class AddFriendsToTripActivity extends AppCompatActivity {
         tripKey = getIntent().getStringExtra("KEY");
         listView = (ListView) findViewById(R.id.lvAddFriendsToTrip);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        rootRefUser = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-        rootRefUser = FirebaseDatabase.getInstance().getReference("Trips").child(tripKey);
-        rootRefUser.child("friends").addListenerForSingleValueEvent(new ValueEventListener() {
+        rootRefUser = FirebaseDatabase.getInstance().getReference("Users");
+        rootRefUser.child(firebaseUser.getUid()).child("friends").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {};
                 friends = new ArrayList<String>();
                 if(dataSnapshot != null) {
                     friends  = dataSnapshot.getValue(t);
-//                    AddFriendsToTripAdapter adapter = new AddFriendsToTripAdapter(AddFriendsToTripActivity.this,R.layout.friendsview,friends,tripKey);
-                }
+                    rootRefUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            GenericTypeIndicator<ArrayList<User>> t = new GenericTypeIndicator<ArrayList<User>>() {};
+                            ArrayList<User> friendUsers=new ArrayList<User>();
+                            for(DataSnapshot f: dataSnapshot.getChildren()) {
+                                User u = f.getValue(User.class);
+                                if(friends.contains(u.getId())) {
+                                    friendUsers.add(u);
+                                }
+                            }
 
+
+                            AddFriendsToTripAdapter adapter = new AddFriendsToTripAdapter(AddFriendsToTripActivity.this,R.layout.friendsview,friendUsers,tripKey);
+                            listView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
             }
 
             @Override
