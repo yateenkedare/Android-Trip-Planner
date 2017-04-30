@@ -402,6 +402,7 @@ public class TripChatActivity extends AppCompatActivity {
                 return true;
             case R.id.leaveChatRoom:
                 leaveChatRoom();
+                //TODO delete trip chat
                 return true;
             case R.id.tripProfile:
                 Intent intent1 = new Intent(TripChatActivity.this, TripProfileActivity.class);
@@ -418,6 +419,7 @@ public class TripChatActivity extends AppCompatActivity {
             myTrips.remove(tripKey);
             ref1.child("myTrips").setValue(myTrips);
             FirebaseDatabase.getInstance().getReference("Trips").child(tripKey).removeValue();
+            FirebaseDatabase.getInstance().getReference("Chats").child(tripKey).removeValue();
         }
         else {
             if(currentUser.getSubTrips().contains(tripKey)){
