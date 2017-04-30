@@ -138,6 +138,7 @@ public class ChatAdapter extends BaseAdapter {
             holder.senderInfo.setText(chatMessage.getName());
         }
         else{//image
+            holder.txtMessage.setText(" ");
             Picasso.with(context)
                     .load(chatMessage.getMessage())
                     .into(holder.imageView);

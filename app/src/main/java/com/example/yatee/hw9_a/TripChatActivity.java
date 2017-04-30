@@ -69,6 +69,7 @@ public class TripChatActivity extends AppCompatActivity {
     FirebaseStorage storage;
     String path;
     ImageView imageViewTemp;
+    ChildEventListener listner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,37 @@ public class TripChatActivity extends AppCompatActivity {
         ref1 = db.getReference("Users").child(firebaseUser.getUid());
 
         driverFunction();
+        listner=new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Message message=dataSnapshot.getValue(Message.class);
+                Log.d("ChildListner",message.toString());
+                //displayMessage(message);
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+
 
 
         /*ref2=db.getReference("Users");
@@ -173,10 +205,10 @@ public class TripChatActivity extends AppCompatActivity {
                                 if (TextUtils.isEmpty(messageText)) {
                                     return;
                                 }
+                                //TODO chat message Id needs to be revamped Dont make it random()
 
                                 Message chatMessage = new Message();
-                                chatMessage.setId(dataSnapshot.getChildrenCount());
-                                countID=dataSnapshot.getChildrenCount();
+
                                 chatMessage.setUserId(firebaseUser.getUid().toString());
                                 chatMessage.setMessage(messageText);
                                 chatMessage.setType(0);//0 text,1 image
@@ -186,9 +218,12 @@ public class TripChatActivity extends AppCompatActivity {
 
                                 messageET.setText("");
                                 Log.d("Count:",String.valueOf(dataSnapshot.getChildrenCount()));
-                                rootRef.child(String.valueOf(dataSnapshot.getChildrenCount())).setValue(chatMessage);
+                                chatMessage.setId(rootRef.push().getKey());
+                                rootRef.child(chatMessage.getId()).setValue(chatMessage);
+
+
                                 displayMessage(chatMessage);
-                                initControls();
+                                //initControls();
 
 
                             }
@@ -203,6 +238,7 @@ public class TripChatActivity extends AppCompatActivity {
 
                             }
                         });
+
 
 
                     }
@@ -222,12 +258,16 @@ public class TripChatActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
 
     public void displayMessage(Message message) {
         adapter.add(message);
         adapter.notifyDataSetChanged();
         scroll();
+
     }
 
     private void scroll() {
@@ -235,6 +275,7 @@ public class TripChatActivity extends AppCompatActivity {
     }
 
     private void loadDummyHistory(){
+
         Log.d("loadDummyHistory:","run");
         messagesContainer.setAdapter(null);
         chatHistory = new ArrayList<Message>();
@@ -272,6 +313,8 @@ public class TripChatActivity extends AppCompatActivity {
                                 }
 
 
+
+
                             }
                         }
 
@@ -281,6 +324,7 @@ public class TripChatActivity extends AppCompatActivity {
                         }
                     });
 
+
                 }
 
             }
@@ -289,7 +333,12 @@ public class TripChatActivity extends AppCompatActivity {
 
             }
         });
+
+
+        rootRef.addChildEventListener(listner);
     }
+
+
 
 
     /*public void display(){
@@ -469,9 +518,21 @@ public class TripChatActivity extends AppCompatActivity {
                             @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
                             Log.d("URL",downloadUrl.toString());
 
+                            rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
                             Message chatMessage = new Message();
                             countID+=1;
-                            chatMessage.setId(countID);
+
                             chatMessage.setUserId(firebaseUser.getUid().toString());
                             chatMessage.setMessage(downloadUrl.toString());
                             chatMessage.setType(1);//0 text,1 image
@@ -482,9 +543,12 @@ public class TripChatActivity extends AppCompatActivity {
                             messageET.setText("");
                             Log.d("Count:",String.valueOf(countID));
 
-                            rootRef.child(String.valueOf(countID)).setValue(chatMessage);
+                            chatMessage.setId(rootRef.push().getKey());
+                            rootRef.child(chatMessage.getId()).setValue(chatMessage);
                             displayMessage(chatMessage);
-                            initControls();
+                            //initControls();
+
+                            //TODO Check if the image indices are correct when sending new message. Also check the deletion if it's working
 
 
 
@@ -500,4 +564,5 @@ public class TripChatActivity extends AppCompatActivity {
 
         }
     }
+
 }
