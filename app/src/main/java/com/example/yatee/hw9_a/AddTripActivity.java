@@ -112,7 +112,7 @@ public class AddTripActivity extends AppCompatActivity {
                                 Intent intent = new Intent(AddTripActivity.this,TripChatActivity.class);
                                 intent.putExtra("KEY",key);
                                 startActivity(intent);
-
+                                finish();
                                 Toast.makeText(AddTripActivity.this,"Trip Created", Toast.LENGTH_SHORT).show();
                             }
 

@@ -2,15 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/requestName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_centerHorizontal="true"
-        android:text="TextView" />
+        android:text="TextView"
+        android:layout_marginLeft="10sp"
+        android:layout_alignBaseline="@+id/accept"
+        android:layout_alignBottom="@+id/accept"
+        android:layout_toRightOf="@+id/displayPicture"
+        android:layout_toEndOf="@+id/displayPicture" />
 
     <Button
         android:id="@+id/accept"
@@ -21,8 +25,8 @@
 
     <ImageView
         android:id="@+id/displayPicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
         app:srcCompat="@drawable/common_full_open_on_phone" />
 
 </RelativeLayout>
