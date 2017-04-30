@@ -1,6 +1,9 @@
 package com.example.yatee.hw9_a;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,6 +20,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -26,12 +31,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 public class TripChatActivity extends AppCompatActivity {
     //TODO add Friends from Friends List
@@ -46,7 +57,7 @@ public class TripChatActivity extends AppCompatActivity {
     ArrayList<User> friends;
     String tripKey;
     LinearLayout linearLayout;
-    long count;
+    long countID;
     //New look variables
     private EditText messageET;
     private ListView messagesContainer;
@@ -55,6 +66,8 @@ public class TripChatActivity extends AppCompatActivity {
     private ChatAdapter adapter;
     private ArrayList<Message> chatHistory;
     ArrayList<String> deletedMessages;
+    FirebaseStorage storage;
+    String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +75,7 @@ public class TripChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trip_chat);
         mAuth=FirebaseAuth.getInstance();
         firebaseUser=mAuth.getCurrentUser();
+        storage=FirebaseStorage.getInstance();
         db = FirebaseDatabase.getInstance();
         tripKey = getIntent().getStringExtra("KEY");
         rootRef=db.getReference("Chats").child(tripKey);
@@ -165,8 +179,10 @@ public class TripChatActivity extends AppCompatActivity {
 
                                 Message chatMessage = new Message();
                                 chatMessage.setId(dataSnapshot.getChildrenCount());
+                                countID=dataSnapshot.getChildrenCount();
                                 chatMessage.setUserId(firebaseUser.getUid().toString());
                                 chatMessage.setMessage(messageText);
+                                chatMessage.setType(0);//0 text,1 image
                                 chatMessage.setName(currentUser.getfName()+" "+currentUser.getlName());
                                 chatMessage.setDate(DateFormat.getDateTimeInstance().format(new Date()));
                                 Log.d("Count:","clicked");
@@ -187,6 +203,7 @@ public class TripChatActivity extends AppCompatActivity {
                                 Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                                 startActivityForResult(pickPhoto , 1);//one can be replaced with any action code
+
                             }
                         });
 
@@ -378,21 +395,105 @@ public class TripChatActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.addMembersToTripChat:
-                //TODO unimplemented
                 Intent intent = new Intent(TripChatActivity.this,AddFriendsToTripActivity.class);
                 intent.putExtra("KEY",tripKey);
                 startActivity(intent);
                 return true;
             case R.id.leaveChatRoom:
-                //TODO - delete trip from sub trips or my trips
+                leaveChatRoom();
                 return true;
             case R.id.tripProfile:
                 Intent intent1 = new Intent(TripChatActivity.this, TripProfileActivity.class);
                 intent1.putExtra("KEY",tripKey);
+                startActivity(intent1);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    public void leaveChatRoom(){
+        if(currentUser.getMyTrips().contains(tripKey)){
+            ArrayList<String> myTrips = currentUser.getMyTrips();
+            myTrips.remove(tripKey);
+            ref1.child("myTrips").setValue(myTrips);
+            FirebaseDatabase.getInstance().getReference("Trips").child(tripKey).removeValue();
+        }
+        else {
+            if(currentUser.getSubTrips().contains(tripKey)){
+                ArrayList<String> subTrips = currentUser.getSubTrips();
+                subTrips.remove(tripKey);
+                ref1.child("subTrips").setValue(subTrips);
+            }
+        }
 
+        Intent intent = new Intent(TripChatActivity.this,TabbedActivity.class);
+        startActivity(intent);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        final String[] downloadURL = new String[1];
+        switch (requestCode){
+            case 1:
+                if(resultCode == RESULT_OK){
+                    final ImageView imageView=new ImageView(this);
+                    Uri selectedImage = data.getData();
+                    imageView.setImageURI(selectedImage);
+
+                    path= UUID.randomUUID().toString();
+                    StorageReference storageRef = storage.getReference(path);
+
+                    imageView.setDrawingCacheEnabled(true);
+                    imageView.buildDrawingCache();
+                    Bitmap bitmap = imageView.getDrawingCache();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data2 = baos.toByteArray();
+
+
+                    UploadTask uploadTask = storageRef.putBytes(data2);
+                    Log.d("CURRENT USER1:",mAuth.getCurrentUser().toString());
+
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                        }
+                    }).addOnSuccessListener(this,new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Log.d("CURRENT USER2:",mAuth.getCurrentUser().toString());
+                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                            @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            Log.d("URL",downloadUrl.toString());
+                            downloadURL[0] =downloadUrl.toString();
+                            rootRef.child(firebaseUser.getUid()).child("photoURL").setValue(downloadUrl.toString());
+
+
+                        }
+                    });
+
+                    Log.d("UPLOAD:","Successsful");
+
+
+                    Message chatMessage = new Message();
+                    chatMessage.setId(countID);
+                    chatMessage.setUserId(firebaseUser.getUid().toString());
+                    chatMessage.setMessage(downloadURL.toString());
+                    chatMessage.setType(1);//0 text,1 image
+                    chatMessage.setName(currentUser.getfName()+" "+currentUser.getlName());
+                    chatMessage.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+                    Log.d("Count:","clicked");
+
+                    messageET.setText("");
+                    Log.d("Count:",String.valueOf(countID));
+                    rootRef.child(String.valueOf(countID)).setValue(chatMessage);
+                    displayMessage(chatMessage);
+                    initControls();
+
+                }
+                break;
+
+        }
+    }
 }

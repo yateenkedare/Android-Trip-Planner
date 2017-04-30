@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,9 +130,21 @@ public class ChatAdapter extends BaseAdapter {
             myMsg=false;
         //to simulate whether it me or other sender
         setAlignment(holder, myMsg);
-        holder.txtMessage.setText(chatMessage.getMessage());
-        holder.txtInfo.setText(chatMessage.getDate());
-        holder.senderInfo.setText(chatMessage.getName());
+        if(chatMessage.getType()==0){//text
+            holder.txtMessage.setText(chatMessage.getMessage());
+            holder.txtInfo.setText(chatMessage.getDate());
+            holder.senderInfo.setText(chatMessage.getName());
+        }
+        else{//image
+            holder.txtMessage.setText(chatMessage.getMessage());
+            Picasso.with(context)
+                    .load(chatMessage.getMessage())
+                    .into(holder.imageView);
+
+            holder.txtInfo.setText(chatMessage.getDate());
+            holder.senderInfo.setText(chatMessage.getName());
+        }
+
 
         return convertView;
     }
@@ -161,6 +175,7 @@ public class ChatAdapter extends BaseAdapter {
             layoutParams.gravity = Gravity.RIGHT;
             holder.txtMessage.setLayoutParams(layoutParams);
             holder.senderInfo.setLayoutParams(layoutParams);
+            holder.imageView.setLayoutParams(layoutParams);
 
             layoutParams = (LinearLayout.LayoutParams) holder.txtInfo.getLayoutParams();
             layoutParams.gravity = Gravity.RIGHT;
@@ -182,6 +197,7 @@ public class ChatAdapter extends BaseAdapter {
             layoutParams.gravity = Gravity.LEFT;
             holder.txtMessage.setLayoutParams(layoutParams);
             holder.senderInfo.setLayoutParams(layoutParams);
+            holder.imageView.setLayoutParams(layoutParams);
 
             layoutParams = (LinearLayout.LayoutParams) holder.txtInfo.getLayoutParams();
             layoutParams.gravity = Gravity.LEFT;
@@ -196,6 +212,7 @@ public class ChatAdapter extends BaseAdapter {
         holder.contentWithBG = (LinearLayout) v.findViewById(R.id.contentWithBackground);
         holder.txtInfo = (TextView) v.findViewById(R.id.txtInfo);
         holder.senderInfo = (TextView) v.findViewById(R.id.senderInfo);
+        holder.imageView=(ImageView) v.findViewById(R.id.imageView2);
 
         return holder;
     }
@@ -206,5 +223,6 @@ public class ChatAdapter extends BaseAdapter {
         public TextView senderInfo;
         public LinearLayout content;
         public LinearLayout contentWithBG;
+        public ImageView imageView;
     }
 }

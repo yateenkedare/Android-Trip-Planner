@@ -9,6 +9,15 @@ public class Message {
     private String name;
     private String message;
     private String userId;
+    int type;//0 text,1 image
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     @Override
     public String toString() {
