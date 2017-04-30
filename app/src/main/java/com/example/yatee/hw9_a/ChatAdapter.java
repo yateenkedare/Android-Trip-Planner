@@ -89,16 +89,16 @@ public class ChatAdapter extends BaseAdapter {
                             if(dataSnapshot != null) {
                                 deletedMessages= dataSnapshot.getValue(t);
                             }
-                            Log.d("Deletemessages: ",dataSnapshot.toString());
+                            //Log.d("Deletemessages: ",dataSnapshot.toString());
                             if(deletedMessages!=null){
                                 deletedMessages.add(String.valueOf(chatMessage.getId()));
                                 Log.d("Deletemessages:(IF)",deletedMessages.toString());
-                                ref1.child("DeletedMessages").setValue(deletedMessages);
+                                ref1.child("DeletedMessages").child(tripKey).setValue(deletedMessages);
                             }else{
                                 deletedMessages=new ArrayList<String>();
                                 deletedMessages.add(String.valueOf(chatMessage.getId()));
                                 Log.d("DeletedMessages:(ELSE)",deletedMessages.toString());
-                                ref1.child("DeletedMessages").setValue(deletedMessages);
+                                ref1.child("DeletedMessages").child(tripKey).setValue(deletedMessages);
                             }
 
                         }
