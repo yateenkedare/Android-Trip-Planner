@@ -71,6 +71,7 @@ public class ChatAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         final Message chatMessage = getItem(position);
+        if(chatMessage==null){return null;}
         LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
@@ -124,6 +125,7 @@ public class ChatAdapter extends BaseAdapter {
         }
 
         boolean myMsg;//Just a dummy check
+        Log.d("TEST:",chatMessage.toString());
         if(chatMessage.getUserId().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()))
             myMsg=true;
         else
@@ -136,7 +138,6 @@ public class ChatAdapter extends BaseAdapter {
             holder.senderInfo.setText(chatMessage.getName());
         }
         else{//image
-            holder.txtMessage.setText(chatMessage.getMessage());
             Picasso.with(context)
                     .load(chatMessage.getMessage())
                     .into(holder.imageView);

@@ -68,6 +68,7 @@ public class TripChatActivity extends AppCompatActivity {
     ArrayList<String> deletedMessages;
     FirebaseStorage storage;
     String path;
+    ImageView imageViewTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -436,7 +437,7 @@ public class TripChatActivity extends AppCompatActivity {
         switch (requestCode){
             case 1:
                 if(resultCode == RESULT_OK){
-                    final ImageView imageViewTemp= new ImageView(this);
+                    imageViewTemp= (ImageView) findViewById(R.id.ImageViewTemp);
                     Uri selectedImage = data.getData();
                     Log.d("Getdata:",selectedImage.toString());
                     imageViewTemp.setImageURI(selectedImage);
@@ -446,8 +447,9 @@ public class TripChatActivity extends AppCompatActivity {
 
                     imageViewTemp.setDrawingCacheEnabled(true);
                     imageViewTemp.buildDrawingCache();
+                    //Bitmap bitmap = Bitmap.createBitmap(imageViewTemp.getMeasuredWidth(), imageViewTemp.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
                     Bitmap bitmap = imageViewTemp.getDrawingCache();
-                    Log.d("TEMP",bitmap.toString());
+                    //Log.d("TEMP",bitmap.toString());
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] data2 = baos.toByteArray();
@@ -468,8 +470,23 @@ public class TripChatActivity extends AppCompatActivity {
                             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                             @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
                             Log.d("URL",downloadUrl.toString());
-                            downloadURL[0] =downloadUrl.toString();
-                            rootRef.child(firebaseUser.getUid()).child("photoURL").setValue(downloadUrl.toString());
+
+                            Message chatMessage = new Message();
+                            chatMessage.setId(countID);
+                            chatMessage.setUserId(firebaseUser.getUid().toString());
+                            chatMessage.setMessage(downloadUrl.toString());
+                            chatMessage.setType(1);//0 text,1 image
+                            chatMessage.setName(currentUser.getfName()+" "+currentUser.getlName());
+                            chatMessage.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+                            Log.d("Count:","clicked");
+
+                            messageET.setText("");
+                            Log.d("Count:",String.valueOf(countID));
+                            countID+=1;
+                            rootRef.child(String.valueOf(countID)).setValue(chatMessage);
+                            displayMessage(chatMessage);
+                            initControls();
+
 
 
                         }
@@ -478,20 +495,6 @@ public class TripChatActivity extends AppCompatActivity {
                     Log.d("UPLOAD:","Successsful");
 
 
-                    Message chatMessage = new Message();
-                    chatMessage.setId(countID);
-                    chatMessage.setUserId(firebaseUser.getUid().toString());
-                    chatMessage.setMessage(downloadURL.toString());
-                    chatMessage.setType(1);//0 text,1 image
-                    chatMessage.setName(currentUser.getfName()+" "+currentUser.getlName());
-                    chatMessage.setDate(DateFormat.getDateTimeInstance().format(new Date()));
-                    Log.d("Count:","clicked");
-
-                    messageET.setText("");
-                    Log.d("Count:",String.valueOf(countID));
-                    rootRef.child(String.valueOf(countID)).setValue(chatMessage);
-                    displayMessage(chatMessage);
-                    initControls();
 
                 }
                 break;
