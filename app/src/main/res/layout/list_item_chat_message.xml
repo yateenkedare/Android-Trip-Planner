@@ -32,6 +32,12 @@
                 android:textColor="@android:color/black"
                 android:layout_weight="5"
                 android:maxWidth="240dp" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                />
             <TextView
                 android:id="@+id/senderInfo"
                 android:textSize="6dp"
@@ -40,13 +46,6 @@
                 android:layout_weight="1"
                 android:textColor="@android:color/black"
                 android:maxWidth="240dp" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

@@ -164,10 +164,6 @@ public class TripChatActivity extends AppCompatActivity {
                         sendBtn = (ImageView) findViewById(R.id.chatSendButton);
                         sendImage=(ImageView) findViewById(R.id.imageUpload);
 
-                        TextView meLabel = (TextView) findViewById(R.id.meLbl);
-                        TextView companionLabel = (TextView) findViewById(R.id.friendLabel);
-                        RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
-                        companionLabel.setText("Others");// Hard Coded
                         loadDummyHistory();
 
                         sendBtn.setOnClickListener(new View.OnClickListener() {
@@ -474,6 +470,7 @@ public class TripChatActivity extends AppCompatActivity {
                             Log.d("URL",downloadUrl.toString());
 
                             Message chatMessage = new Message();
+                            countID+=1;
                             chatMessage.setId(countID);
                             chatMessage.setUserId(firebaseUser.getUid().toString());
                             chatMessage.setMessage(downloadUrl.toString());
@@ -484,7 +481,7 @@ public class TripChatActivity extends AppCompatActivity {
 
                             messageET.setText("");
                             Log.d("Count:",String.valueOf(countID));
-                            countID+=1;
+
                             rootRef.child(String.valueOf(countID)).setValue(chatMessage);
                             displayMessage(chatMessage);
                             initControls();
