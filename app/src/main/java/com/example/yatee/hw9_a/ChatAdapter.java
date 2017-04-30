@@ -136,6 +136,7 @@ public class ChatAdapter extends BaseAdapter {
             holder.txtMessage.setText(chatMessage.getMessage());
             holder.txtInfo.setText(chatMessage.getDate());
             holder.senderInfo.setText(chatMessage.getName());
+            holder.imageView.setVisibility(View.GONE);
         }
         else{//image
             holder.txtMessage.setText(" ");

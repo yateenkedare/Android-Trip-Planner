@@ -84,39 +84,6 @@ public class TripChatActivity extends AppCompatActivity {
         ref1 = db.getReference("Users").child(firebaseUser.getUid());
 
         driverFunction();
-        listner=new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Message message=dataSnapshot.getValue(Message.class);
-                Log.d("ChildListner",message.toString());
-                //displayMessage(message);
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-
-
-
-
         /*ref2=db.getReference("Users");
         linearLayout= (LinearLayout) findViewById(R.id.messageContainer);
 
@@ -187,68 +154,52 @@ public class TripChatActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 currentUser=dataSnapshot.getValue(User.class);
-                rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                messagesContainer = (ListView) findViewById(R.id.messagesContainer);
+                messageET = (EditText) findViewById(R.id.messageEdit);
+                sendBtn = (ImageView) findViewById(R.id.chatSendButton);
+                sendImage=(ImageView) findViewById(R.id.imageUpload);
+
+                loadDummyHistory();
+
+                sendBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onDataChange(final DataSnapshot dataSnapshot) {
+                    public void onClick(View v) {
+                        String messageText = messageET.getText().toString();
+                        if (TextUtils.isEmpty(messageText)) {
+                            return;
+                        }
+                        //TODO chat message Id needs to be revamped Dont make it random()
 
-                        messagesContainer = (ListView) findViewById(R.id.messagesContainer);
-                        messageET = (EditText) findViewById(R.id.messageEdit);
-                        sendBtn = (ImageView) findViewById(R.id.chatSendButton);
-                        sendImage=(ImageView) findViewById(R.id.imageUpload);
+                        Message chatMessage = new Message();
 
-                        loadDummyHistory();
+                        chatMessage.setUserId(firebaseUser.getUid().toString());
+                        chatMessage.setMessage(messageText);
+                        chatMessage.setType(0);//0 text,1 image
+                        chatMessage.setName(currentUser.getfName()+" "+currentUser.getlName());
+                        chatMessage.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+                        Log.d("Count:","clicked");
 
-                        sendBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                String messageText = messageET.getText().toString();
-                                if (TextUtils.isEmpty(messageText)) {
-                                    return;
-                                }
-                                //TODO chat message Id needs to be revamped Dont make it random()
+                        messageET.setText("");
+                        chatMessage.setId(rootRef.push().getKey());
+                        rootRef.child(chatMessage.getId()).setValue(chatMessage);
+                        adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>(),rootRef,ref1,tripKey);
+                        messagesContainer.setAdapter(adapter);
+                        displayMessage(chatMessage);
+                        //initControls();
 
-                                Message chatMessage = new Message();
-
-                                chatMessage.setUserId(firebaseUser.getUid().toString());
-                                chatMessage.setMessage(messageText);
-                                chatMessage.setType(0);//0 text,1 image
-                                chatMessage.setName(currentUser.getfName()+" "+currentUser.getlName());
-                                chatMessage.setDate(DateFormat.getDateTimeInstance().format(new Date()));
-                                Log.d("Count:","clicked");
-
-                                messageET.setText("");
-                                Log.d("Count:",String.valueOf(dataSnapshot.getChildrenCount()));
-                                chatMessage.setId(rootRef.push().getKey());
-                                rootRef.child(chatMessage.getId()).setValue(chatMessage);
-
-
-                                displayMessage(chatMessage);
-                                //initControls();
-
-
-                            }
-                        });
-
-                        sendImage.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                                startActivityForResult(pickPhoto , 1);//one can be replaced with any action code
-
-                            }
-                        });
-
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
 
                     }
                 });
 
+                sendImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(pickPhoto , 1);//one can be replaced with any action code
+
+                    }
+                });
 
             }
 
@@ -275,7 +226,6 @@ public class TripChatActivity extends AppCompatActivity {
     }
 
     private void loadDummyHistory(){
-
         Log.d("loadDummyHistory:","run");
         messagesContainer.setAdapter(null);
         chatHistory = new ArrayList<Message>();
@@ -286,23 +236,12 @@ public class TripChatActivity extends AppCompatActivity {
                 GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {};
                 if(dataSnapshot != null) {
                     deletedMessages= dataSnapshot.getValue(t);
-
-                    rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    rootRef.addChildEventListener(new ChildEventListener() {
                         @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                                if(deletedMessages!=null){
-                                    //Log.d("DeletedMessages:",deletedMessages.toString());
-                                    if(!deletedMessages.contains(String.valueOf(String.valueOf(snapshot.getValue(Message.class).getId())))){
-                                        chatHistory.add(snapshot.getValue(Message.class));
-                                        adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>(),rootRef,ref1,tripKey);
-                                        messagesContainer.setAdapter(adapter);
-                                        for(int i=0; i<chatHistory.size(); i++) {
-                                            Message message = chatHistory.get(i);
-                                            displayMessage(message);
-                                        }
-                                    }
-                                }else{
+                        public void onChildAdded(DataSnapshot snapshot, String s) {
+                            if(deletedMessages!=null){
+                                //Log.d("DeletedMessages:",deletedMessages.toString());
+                                if(!deletedMessages.contains(String.valueOf(String.valueOf(snapshot.getValue(Message.class).getId())))){
                                     chatHistory.add(snapshot.getValue(Message.class));
                                     adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>(),rootRef,ref1,tripKey);
                                     messagesContainer.setAdapter(adapter);
@@ -311,9 +250,45 @@ public class TripChatActivity extends AppCompatActivity {
                                         displayMessage(message);
                                     }
                                 }
+                            }else{
+                                chatHistory.add(snapshot.getValue(Message.class));
+                                adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>(),rootRef,ref1,tripKey);
+                                messagesContainer.setAdapter(adapter);
+                                for(int i=0; i<chatHistory.size(); i++) {
+                                    Message message = chatHistory.get(i);
+                                    displayMessage(message);
+                                }
+                            }
 
 
+                        }
 
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                    rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for(DataSnapshot snapshot: dataSnapshot.getChildren()){
 
                             }
                         }
@@ -334,8 +309,6 @@ public class TripChatActivity extends AppCompatActivity {
             }
         });
 
-
-        rootRef.addChildEventListener(listner);
     }
 
 
@@ -556,8 +529,6 @@ public class TripChatActivity extends AppCompatActivity {
                     });
 
                     Log.d("UPLOAD:","Successsful");
-
-
 
                 }
                 break;
