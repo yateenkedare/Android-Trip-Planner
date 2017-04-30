@@ -45,6 +45,7 @@ public class MyTripsFragment extends Fragment {
         if(isVisibleToUser){
             if(isResumed()){
                 visibleActions();
+                Log.d("TEST Duplicate", "Test 1");
             }
         }
     }
@@ -54,6 +55,7 @@ public class MyTripsFragment extends Fragment {
         super.onResume();
         if(getUserVisibleHint()){
             visibleActions();
+            Log.d("TEST Duplicate", "Test 2");
         }
     }
 
