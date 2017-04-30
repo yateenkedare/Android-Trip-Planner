@@ -39,7 +39,8 @@ public class TripProfileActivity extends AppCompatActivity {
     FirebaseDatabase db;
     Trip currentTrip;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 0x05;
-    ListAdapter adapter;
+    ArrayAdapter<Places> adapter;
+    ArrayList<Places> currentplaces;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,17 +75,18 @@ public class TripProfileActivity extends AppCompatActivity {
         refPlaces.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {};
-                ArrayList<String> places = new ArrayList<String>();
+                GenericTypeIndicator<ArrayList<Places>> t = new GenericTypeIndicator<ArrayList<Places>>() {};
+                currentplaces = new ArrayList<Places>();
                 if(dataSnapshot != null) {
-                    places  = dataSnapshot.getValue(t);
+                    currentplaces = dataSnapshot.getValue(t);
                 }
 
-                if(places  != null){
-                    adapter =  new ArrayAdapter<String>(TripProfileActivity.this,
-                            android.R.layout.simple_list_item_1, places);
-                    placesListView.setAdapter(adapter);
+                if(currentplaces== null){
+                    currentplaces = new ArrayList<Places>();
                 }
+                adapter =  new ArrayAdapter<Places>(TripProfileActivity.this,
+                        android.R.layout.simple_list_item_1, currentplaces);
+                placesListView.setAdapter(adapter);
             }
 
             @Override
@@ -113,6 +115,13 @@ public class TripProfileActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 Log.i(TAG, "Place: " + place.toString());
+                Places p = new Places(place.getName().toString(), place.getId());
+
+                if(!currentplaces.contains(p)){
+                    currentplaces.add(p);
+                    adapter.notifyDataSetChanged();
+                    refPlaces.setValue(currentplaces);
+                }
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 // TODO: Handle the error.
