@@ -436,16 +436,18 @@ public class TripChatActivity extends AppCompatActivity {
         switch (requestCode){
             case 1:
                 if(resultCode == RESULT_OK){
-                    final ImageView imageView=new ImageView(this);
+                    final ImageView imageViewTemp= new ImageView(this);
                     Uri selectedImage = data.getData();
-                    imageView.setImageURI(selectedImage);
+                    Log.d("Getdata:",selectedImage.toString());
+                    imageViewTemp.setImageURI(selectedImage);
 
                     path= UUID.randomUUID().toString();
                     StorageReference storageRef = storage.getReference(path);
 
-                    imageView.setDrawingCacheEnabled(true);
-                    imageView.buildDrawingCache();
-                    Bitmap bitmap = imageView.getDrawingCache();
+                    imageViewTemp.setDrawingCacheEnabled(true);
+                    imageViewTemp.buildDrawingCache();
+                    Bitmap bitmap = imageViewTemp.getDrawingCache();
+                    Log.d("TEMP",bitmap.toString());
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] data2 = baos.toByteArray();

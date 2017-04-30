@@ -193,6 +193,7 @@ public class ProfileFragment extends Fragment{
                     profilePicture.setDrawingCacheEnabled(true);
                     profilePicture.buildDrawingCache();
                     Bitmap bitmap = profilePicture.getDrawingCache();
+                    Log.d("TEMP",bitmap.toString());
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] data2 = baos.toByteArray();
