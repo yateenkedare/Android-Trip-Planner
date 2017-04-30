@@ -10,6 +10,14 @@ public class Places  {
     String place;
     String id;
 
+    public Places() {
+    }
+
+    public Places(String place, String id) {
+        this.place = place;
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }
