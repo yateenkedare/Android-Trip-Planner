@@ -64,9 +64,9 @@ public class TripChatActivity extends AppCompatActivity {
         firebaseUser=mAuth.getCurrentUser();
         db = FirebaseDatabase.getInstance();
         tripKey = getIntent().getStringExtra("KEY");
-        rootRef=db.getReference("Chats");
+        rootRef=db.getReference("Chats").child(tripKey);
         ref1 = db.getReference("Users").child(firebaseUser.getUid());
-        driverFunction();
+
 
 
 
@@ -169,6 +169,7 @@ public class TripChatActivity extends AppCompatActivity {
                                 chatMessage.setMessage(messageText);
                                 chatMessage.setName(currentUser.getfName()+" "+currentUser.getlName());
                                 chatMessage.setDate(DateFormat.getDateTimeInstance().format(new Date()));
+                                Log.d("Count:","clicked");
 
                                 messageET.setText("");
                                 Log.d("Count:",String.valueOf(dataSnapshot.getChildrenCount()));
@@ -239,7 +240,7 @@ public class TripChatActivity extends AppCompatActivity {
                                     Log.d("DeletedMessages:",deletedMessages.toString());
                                     if(!deletedMessages.contains(String.valueOf(String.valueOf(snapshot.getValue(Message.class).getId())))){
                                         chatHistory.add(snapshot.getValue(Message.class));
-                                        adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>(),rootRef,ref1);
+                                        adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>(),rootRef,ref1,tripKey);
                                         messagesContainer.setAdapter(adapter);
                                         for(int i=0; i<chatHistory.size(); i++) {
                                             Message message = chatHistory.get(i);
@@ -248,7 +249,7 @@ public class TripChatActivity extends AppCompatActivity {
                                     }
                                 }else{
                                     chatHistory.add(snapshot.getValue(Message.class));
-                                    adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>(),rootRef,ref1);
+                                    adapter = new ChatAdapter(TripChatActivity.this, new ArrayList<Message>(),rootRef,ref1,tripKey);
                                     messagesContainer.setAdapter(adapter);
                                     for(int i=0; i<chatHistory.size(); i++) {
                                         Message message = chatHistory.get(i);

@@ -37,6 +37,7 @@ public class TripsAdapter extends ArrayAdapter<Trip> {
     List<Trip> objects;
     int mode;
     DatabaseReference rootRefCurrentUsers;
+    DatabaseReference rootRefChats;
     FirebaseUser firebaseUser;
     FirebaseDatabase db;
 
@@ -57,6 +58,7 @@ public class TripsAdapter extends ArrayAdapter<Trip> {
         db = FirebaseDatabase.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         rootRefCurrentUsers = db.getReference("Users").child(firebaseUser.getUid());
+        rootRefChats= db.getReference("Chats");
 
     }
 
@@ -96,11 +98,13 @@ public class TripsAdapter extends ArrayAdapter<Trip> {
                 viewHolder.add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        rootRefChats.child(trip.getKey().toString());
                         Intent intent = new Intent(getContext(),TripChatActivity.class);
                         intent.putExtra("KEY",trip.getKey());
                         context.startActivity(intent);
                     }
                 });
+
             }
             else{
                 viewHolder.add.setText("Join");
@@ -131,6 +135,8 @@ public class TripsAdapter extends ArrayAdapter<Trip> {
 
                             }
                         });
+
+
 
                     }
                 });

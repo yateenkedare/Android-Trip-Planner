@@ -32,12 +32,14 @@ public class ChatAdapter extends BaseAdapter {
     private Activity context;
     DatabaseReference rootRef;
     DatabaseReference ref1;
+    String tripKey;
 
-    public ChatAdapter(Activity context, List<Message> chatMessages, DatabaseReference rootRef,DatabaseReference ref1) {
+    public ChatAdapter(Activity context, List<Message> chatMessages, DatabaseReference rootRef,DatabaseReference ref1,String tripKey) {
         this.context = context;
         this.chatMessages = chatMessages;
         this.rootRef=rootRef;
         this.ref1=ref1;
+        this.tripKey=tripKey;
     }
 
     @Override
@@ -78,7 +80,7 @@ public class ChatAdapter extends BaseAdapter {
                 public boolean onLongClick(View v) {
                     GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
 
-                    ref1.child("DeletedMessages").addListenerForSingleValueEvent(new ValueEventListener() {
+                    ref1.child("DeletedMessages").child(tripKey).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
