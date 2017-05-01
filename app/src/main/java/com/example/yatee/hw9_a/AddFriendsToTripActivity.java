@@ -43,17 +43,20 @@ public class AddFriendsToTripActivity extends AppCompatActivity {
                             ArrayList<User> friendUsers=new ArrayList<User>();
                             for(DataSnapshot f: dataSnapshot.getChildren()) {
                                 User u = f.getValue(User.class);
-
-                                if(friends.contains(u.getId())) {
-                                    if(u.getMyTrips()== null) {
+                                if(friends!=null){
+                                    if(friends.contains(u.getId())) {
+                                        if(u.getMyTrips()== null) {
                                             friendUsers.add(u);
-                                    }
-                                    else{
-                                        if (!u.getMyTrips().contains(tripKey)) {
-                                            friendUsers.add(u);
+                                        }
+                                        else{
+                                            if (!u.getMyTrips().contains(tripKey)) {
+                                                friendUsers.add(u);
+                                            }
                                         }
                                     }
                                 }
+
+
                             }
 
 

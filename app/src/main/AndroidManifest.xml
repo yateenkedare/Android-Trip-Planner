@@ -28,12 +28,12 @@
             android:name=".TabbedActivity"
             android:label="@string/title_activity_tabbed"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".DiscoverFriendsActivity" />
-        <activity android:name=".AddTripActivity" />
-        <activity android:name=".DiscoverTripsActivity" />
-        <activity android:name=".TripChatActivity" />
-        <activity android:name=".AddFriendsToTripActivity" />
-        <activity android:name=".TripProfileActivity" />
+        <activity android:name=".DiscoverFriendsActivity" android:label="Discover Friends" />
+        <activity android:name=".AddTripActivity"  android:label="Add Trip"/>
+        <activity android:name=".DiscoverTripsActivity" android:label="Discover Trip"/>
+        <activity android:name=".TripChatActivity" android:label="Trip Chat"/>
+        <activity android:name=".AddFriendsToTripActivity" android:label="Add Friends"/>
+        <activity android:name=".TripProfileActivity" android:label="Trip Profile"/>
 
         <!-- <meta-data -->
         <!-- android:name="com.google.android.geo.API_KEY" -->

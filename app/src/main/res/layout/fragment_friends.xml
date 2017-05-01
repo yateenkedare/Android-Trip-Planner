@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1.1"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
         android:id="@+id/received"/>
 
 
@@ -34,6 +35,7 @@
         android:textSize="20sp"/>
 
     <ListView
+        android:scrollbarAlwaysDrawVerticalTrack="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
