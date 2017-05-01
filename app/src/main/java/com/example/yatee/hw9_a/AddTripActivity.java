@@ -15,6 +15,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,6 +43,7 @@ public class AddTripActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseDatabase db;
     DatabaseReference rootRefTrip, rootRefUser;
+    Places destination;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +58,7 @@ public class AddTripActivity extends AppCompatActivity {
         tripCoverPhoto = (ImageView) findViewById(R.id.tripCoverPhoto);
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fabTripAdded);
         final EditText mTripTitle = (EditText) findViewById(R.id.tripTitleTV);
-        final EditText mTripLocation = (EditText) findViewById(R.id.tripLocationTV);
+
 
         tripCoverPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +69,33 @@ public class AddTripActivity extends AppCompatActivity {
             }
         });
 
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+
+
+                destination = new Places(place.getName().toString(),place.getId());
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+
+            }
+        });
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(destination.getId() == null || mTripTitle.getText().toString().equals("")){
+                    Toast.makeText(AddTripActivity.this, "Please enter both source and destination", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 final ProgressDialog progressDialog=new ProgressDialog(AddTripActivity.this);
                 progressDialog.setMessage("Loading..");
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -90,7 +118,7 @@ public class AddTripActivity extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                         @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                        Trip trip1 = new Trip(mTripTitle.getText().toString(),mTripLocation.getText().toString(),downloadUrl.toString(),key);
+                        Trip trip1 = new Trip(mTripTitle.getText().toString(),destination.getPlaces(),downloadUrl.toString(),key);
                         rootRefTrip.child(key).setValue(trip1);
 
                         rootRefUser.child(mAuth.getCurrentUser().getUid()).child("myTrips").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -107,6 +135,10 @@ public class AddTripActivity extends AppCompatActivity {
 
                                 trips.add(key);
                                 rootRefUser.child(mAuth.getCurrentUser().getUid()).child("myTrips").setValue(trips);
+                                ArrayList<Places> p = new ArrayList<Places>();
+                                p.add(destination);
+                                FirebaseDatabase.getInstance().getReference("Places").child(key).setValue(p);
+
                                 progressDialog.dismiss();
 
                                 Intent intent = new Intent(AddTripActivity.this,TripChatActivity.class);
