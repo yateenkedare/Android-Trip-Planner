@@ -27,9 +27,12 @@
         <activity android:name=".TripChatActivity" />
         <activity android:name=".AddFriendsToTripActivity" />
         <activity android:name=".TripProfileActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/places_key"/>
+            android:value="@string/places_key" />
+
+        <activity android:name=".RouteActivity"></activity>
     </application>
 
 </manifest>
