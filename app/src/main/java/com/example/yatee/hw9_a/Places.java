@@ -1,6 +1,7 @@
 package com.example.yatee.hw9_a;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by yatee on 4/30/2017.
@@ -37,5 +38,13 @@ public class Places  {
     @Override
     public String toString() {
         return  place;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj != null & obj instanceof Places){
+            return this.id.equals(((Places) obj).id);
+        }
+        return false;
     }
 }
