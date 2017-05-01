@@ -113,7 +113,6 @@ public class SignupActivity extends AppCompatActivity implements GoogleApiClient
                 String confirmPassword = editTextConfirmPassword.getText().toString().trim();
 
                 if(!(fName.equals("") || lName.equals("") || email.equals("") || password.equals("")) && password.equals(confirmPassword) ){
-                    progressDialog.show();
                     mAuth.createUserWithEmailAndPassword(email,password)
                             .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
 
@@ -138,6 +137,7 @@ public class SignupActivity extends AppCompatActivity implements GoogleApiClient
                             Toast.makeText(SignupActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
+                    progressDialog.show();
                 }else {
                     Toast.makeText(SignupActivity.this, "Enter correct details", Toast.LENGTH_SHORT).show();
                 }

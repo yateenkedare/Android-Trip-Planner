@@ -11,4 +11,5 @@
     <string name="gender">Gender:</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="places_in_this_trip">Places in this trip</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

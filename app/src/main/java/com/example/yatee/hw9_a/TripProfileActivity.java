@@ -187,7 +187,7 @@ public class TripProfileActivity extends AppCompatActivity {
                 }
                 routeURL.append("&key=AIzaSyBzsFTY-zCFL-DpmwnAEZaNKgunVMjNDrQ");
                 Log.d("RouteURL",routeURL.toString());
-                Intent intent = new Intent(TripProfileActivity.this,RouteActivity.class);
+                Intent intent = new Intent(TripProfileActivity.this,MapsActivity.class);
                 intent.putExtra("URL",routeURL.toString());
                 startActivity(intent);
                 return true;
