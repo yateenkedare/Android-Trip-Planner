@@ -129,7 +129,7 @@ public class TripProfileActivity extends AppCompatActivity {
         placesListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                if(currentplaces.size()>1){
+                if(currentplaces.size()>1||position==0){
                     ArrayList<Places> n = new ArrayList<>(currentplaces);
                     n.remove(position);
                     refPlaces.setValue(n);
@@ -176,18 +176,19 @@ public class TripProfileActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.getRoute:
+                //https://maps.googleapis.com/maps/api/directions/json?origin=place_id:ChIJF5NfdwgcVIgRuRgluxZnNWc&destination=place_id:ChIJOUywjxUcVIgR1jBAhv2xWW0&waypoints=place_id:ChIJc7nFnYceVIgRyWtpZZiynrU|ChIJgRo4_MQfVIgRZNFDv-ZQRogv&key=AIzaSyBzsFTY-zCFL-DpmwnAEZaNKgunVMjNDrQ
                 StringBuilder routeURL=new StringBuilder();
-                routeURL.append("https://maps.googleapis.com/maps/api/directions/json?origin=");
-                for(int i=0;i<currentplaces.size();i++){
+                routeURL.append("https://maps.googleapis.com/maps/api/directions/json?origin=place_id:"+currentplaces.get(0).getId()+"&destination=place_id:"+currentplaces.get(currentplaces.size()-1).getId()+"&waypoints=");
+                for(int i=1;i<currentplaces.size()-1;i++){
                     routeURL.append("place_id:");
-                    routeURL.append(currentplaces.get(i));
-                    if(i<currentplaces.size()-1)
+                    routeURL.append(currentplaces.get(i).getId());
+                    //if(i<=currentplaces.size()-2)
                         routeURL.append("|");
                 }
-
+                routeURL.append("&key=AIzaSyBzsFTY-zCFL-DpmwnAEZaNKgunVMjNDrQ");
                 Log.d("RouteURL",routeURL.toString());
                 Intent intent = new Intent(TripProfileActivity.this,RouteActivity.class);
-                intent.putExtra("KEY",tripKey);
+                intent.putExtra("URL",routeURL.toString());
                 startActivity(intent);
                 return true;
         }
