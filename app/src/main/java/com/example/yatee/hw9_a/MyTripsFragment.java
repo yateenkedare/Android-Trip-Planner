@@ -1,5 +1,6 @@
 package com.example.yatee.hw9_a;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -32,11 +33,13 @@ public class MyTripsFragment extends Fragment {
     ArrayList<Trip> trips;
     ListView listView;
     TripsAdapter tripsAdapter;
+    ProgressDialog progressDialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_my_trips, container, false);
         return v;
+
     }
 
     @Override
@@ -58,6 +61,11 @@ public class MyTripsFragment extends Fragment {
     }
 
     private void visibleActions(){
+        progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Loading..");
+        progressDialog.show();
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseDatabase.getInstance();
         refUser = db.getReference("Users").child(firebaseUser.getUid());
@@ -91,6 +99,7 @@ public class MyTripsFragment extends Fragment {
                             }
                         });
                     }
+                    progressDialog.dismiss();
                 }
                 if(currentUser.getSubTrips() != null) {
                     for(final String s: currentUser.getSubTrips()) {
@@ -115,6 +124,7 @@ public class MyTripsFragment extends Fragment {
                             }
                         });
                     }
+                    progressDialog.dismiss();
                 }
             }
 

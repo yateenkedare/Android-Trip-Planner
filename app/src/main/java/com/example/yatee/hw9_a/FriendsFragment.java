@@ -1,5 +1,6 @@
 package com.example.yatee.hw9_a;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,7 @@ public class FriendsFragment extends Fragment {
     FirebaseUser firebaseUser;
     ArrayList<User> friends;
     ArrayList<User> received;
+    ProgressDialog progressDialog;
 
     @Nullable
     @Override
@@ -54,6 +56,12 @@ public class FriendsFragment extends Fragment {
     }
 
     private void visibleActions(){
+
+        progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Loading..");
+        progressDialog.show();
+
         db = FirebaseDatabase.getInstance();
 
         friends=new ArrayList<User>();
@@ -66,6 +74,7 @@ public class FriendsFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 Log.d("UserIS:",snapshot.getValue(User.class).toString());
+
                 user=snapshot.getValue(User.class);
                 final ArrayList<String> requestReceivedString=user.getRequestsReceived();
                 final ArrayList<String> friendsString=user.getFriends();
@@ -111,6 +120,7 @@ public class FriendsFragment extends Fragment {
 
                     }
                 });
+                progressDialog.dismiss();
 
             }
 

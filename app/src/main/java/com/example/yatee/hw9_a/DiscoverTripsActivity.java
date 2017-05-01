@@ -1,5 +1,6 @@
 package com.example.yatee.hw9_a;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -27,10 +28,16 @@ public class DiscoverTripsActivity extends AppCompatActivity {
     TripsAdapter tripsAdapter;
     ArrayList<Trip> trips;
     User currentUser;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover_trips);
+
+        progressDialog=new ProgressDialog(DiscoverTripsActivity.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Loading..");
+        progressDialog.show();
 
         db = FirebaseDatabase.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -98,6 +105,7 @@ public class DiscoverTripsActivity extends AppCompatActivity {
 
                                     }
                                 }
+                                progressDialog.dismiss();
                             }
 
                             @Override
