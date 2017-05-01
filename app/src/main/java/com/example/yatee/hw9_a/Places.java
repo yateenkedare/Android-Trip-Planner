@@ -1,5 +1,7 @@
 package com.example.yatee.hw9_a;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -10,13 +12,35 @@ import java.util.Objects;
 public class Places  {
     String place;
     String id;
+    double latitude;
+    double longitude;
+
 
     public Places() {
     }
 
-    public Places(String place, String id) {
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Places(String place, String id,double latitude,double longitude) {
         this.place = place;
         this.id = id;
+        this.latitude=latitude;
+        this.longitude=longitude;
+
     }
 
     public String getId() {
