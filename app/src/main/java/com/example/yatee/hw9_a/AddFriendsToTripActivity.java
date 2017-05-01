@@ -45,8 +45,13 @@ public class AddFriendsToTripActivity extends AppCompatActivity {
                                 User u = f.getValue(User.class);
 
                                 if(friends.contains(u.getId())) {
-                                    if(u.getMyTrips().contains(tripKey)) {
-                                        friendUsers.add(u);
+                                    if(u.getMyTrips()== null) {
+                                            friendUsers.add(u);
+                                    }
+                                    else{
+                                        if (!u.getMyTrips().contains(tripKey)) {
+                                            friendUsers.add(u);
+                                        }
                                     }
                                 }
                             }

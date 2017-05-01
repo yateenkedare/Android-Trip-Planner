@@ -432,15 +432,17 @@ public class TripChatActivity extends AppCompatActivity {
     }
 
     public void leaveChatRoom(){
-        if(currentUser.getMyTrips().contains(tripKey)){
+
+        if(currentUser.getMyTrips()!=null && currentUser.getMyTrips().contains(tripKey)){
             ArrayList<String> myTrips = currentUser.getMyTrips();
             myTrips.remove(tripKey);
             ref1.child("myTrips").setValue(myTrips);
             FirebaseDatabase.getInstance().getReference("Trips").child(tripKey).removeValue();
+            FirebaseDatabase.getInstance().getReference("Places").child(tripKey).removeValue();
             FirebaseDatabase.getInstance().getReference("Chats").child(tripKey).removeValue();
         }
         else {
-            if(currentUser.getSubTrips().contains(tripKey)){
+            if(currentUser.getSubTrips() != null && currentUser.getSubTrips().contains(tripKey)){
                 ArrayList<String> subTrips = currentUser.getSubTrips();
                 subTrips.remove(tripKey);
                 ref1.child("subTrips").setValue(subTrips);
