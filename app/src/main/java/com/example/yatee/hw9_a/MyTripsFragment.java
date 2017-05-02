@@ -99,7 +99,7 @@ public class MyTripsFragment extends Fragment {
                             }
                         });
                     }
-                    progressDialog.dismiss();
+
                 }
                 if(currentUser.getSubTrips() != null) {
                     for(final String s: currentUser.getSubTrips()) {
@@ -124,8 +124,9 @@ public class MyTripsFragment extends Fragment {
                             }
                         });
                     }
-                    progressDialog.dismiss();
+
                 }
+                progressDialog.dismiss();
             }
 
             @Override

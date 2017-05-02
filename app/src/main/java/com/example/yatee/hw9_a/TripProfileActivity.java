@@ -57,13 +57,14 @@ public class TripProfileActivity extends AppCompatActivity {
     ArrayList<Places> currentplaces;
     LocationManager mLocationManager;
     Location mLocation;
-
+    Boolean removed;
+    int removedPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_profile);
         tripKey = getIntent().getStringExtra("KEY");
-
+        removed = false;
         name = (TextView) findViewById(R.id.tvProfileName);
         picture = (ImageView) findViewById(R.id.tripProfileImageView);
         placesListView = (ListView) findViewById(R.id.tripPlacesListView);
@@ -112,15 +113,18 @@ public class TripProfileActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Log.d("CHILD ", "REMOVED");
-                Places p = dataSnapshot.getValue(Places.class);
-                currentplaces.remove(p);
-                adapter.notifyDataSetChanged();
+                if(removed) {
+                    Log.d("CHILD ", "REMOVED");
+                    Places p = dataSnapshot.getValue(Places.class);
+                    currentplaces.remove(removedPosition);
+                    adapter.notifyDataSetChanged();
+                    removed = false;
+                }
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+                Log.d("CHILD ", "MOVED");
             }
 
             @Override
@@ -145,10 +149,12 @@ public class TripProfileActivity extends AppCompatActivity {
         placesListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                if (currentplaces.size() > 1 || position == 0) {
+                if (currentplaces.size() > 1 && position != 0) {
                     ArrayList<Places> n = new ArrayList<>(currentplaces);
                     n.remove(position);
                     refPlaces.setValue(n);
+                    removedPosition = position;
+                    removed = true;
                     return true;
                 } else {
                     Toast.makeText(TripProfileActivity.this, "Trip requires atleast one place", Toast.LENGTH_SHORT).show();
